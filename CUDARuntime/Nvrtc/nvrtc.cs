@@ -1,0 +1,122 @@
+﻿/* (c) ALTIMESH 2019 -- all rights reserved */
+using Altimesh.Hybridizer.Runtime;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
+using System.Text;
+
+namespace Hybridizer.Runtime.CUDAImports
+{
+    public static class nvrtc
+    {
+        public static string GetCudaVersion()
+        {
+            // If not, get the version configured in app.config
+            string cudaVersion = cuda.GetCudaVersion();
+
+            // Otherwise default to latest version
+            if (cudaVersion == null) cudaVersion = "80";
+            cudaVersion = cudaVersion.Replace(".", ""); // Remove all dots ("7.5" will be understood "75")
+
+            return cudaVersion;
+        }
+
+        static INvrtc instance;
+
+        static nvrtc()
+        {
+            string cudaVersion = GetCudaVersion();
+            switch(cudaVersion)
+            {
+                case "101":
+                    instance = new nvrtc101();
+                    break;
+                case "100":
+                    instance = new nvrtc10();
+                    break;
+                default:
+                    throw new NotImplementedException("nvrtc is mapped only for cuda > 10");
+            }
+        }
+
+        public static nvrtcResult DestroyProgram(ref nvrtcProgram prog)
+        {
+            return instance.DestroyProgram(ref prog);
+        }
+
+        public static nvrtcResult CreateProgram(out nvrtcProgram prog, string cudaSource, string cudaSourceName, string[] headers, string[] headerNames)
+        {
+            return instance.CreateProgram(out prog, cudaSource, cudaSourceName, headers, headerNames);
+        }
+
+        public static nvrtcResult CompileProgram(nvrtcProgram prog, string[] options)
+        {
+            return instance.CompileProgram(prog, options);
+        }
+
+        public static nvrtcResult GetProgramLog(nvrtcProgram prog, out string log)
+        {
+            return instance.GetProgramLog(prog, out log);
+        }
+
+        public static nvrtcResult GetPTX(nvrtcProgram prog, out string ptx)
+        {
+            return instance.GetPTX(prog, out ptx);
+        }
+
+        public static nvrtcResult Version(out int major, out int minor)
+        {
+            return instance.Version(out major, out minor);
+        }
+
+        public static nvrtcResult GeneratePTX(string cuda, string[] options, out string ptx, out string log, string[] headerNames = null, string[] headerContents = null)
+        {
+            // TODO: compile
+            nvrtcProgram prog;
+            var nvres = nvrtc.CreateProgram(out prog, cuda, null, headerContents, headerNames);
+
+            if (nvres != nvrtcResult.NVRTC_SUCCESS)
+            {
+                string compileLog;
+                nvrtc.GetProgramLog(prog, out compileLog);
+                log = "Compilation error - log : " + Environment.NewLine + compileLog;
+                ptx = "";
+                return nvres;
+            }
+
+            nvrtcResult compil = nvrtc.CompileProgram(prog, options);
+
+            if (compil == nvrtcResult.NVRTC_ERROR_COMPILATION)
+            {
+                string compileLog;
+                nvrtc.GetProgramLog(prog, out compileLog);
+                log = "Compilation error - log : " + Environment.NewLine + compileLog;
+                ptx = "";
+                return compil;
+            }
+
+            if (compil == nvrtcResult.NVRTC_ERROR_INVALID_OPTION)
+            {
+                string compileLog;
+                nvrtc.GetProgramLog(prog, out compileLog);
+                log = "Invalid option - log : " + Environment.NewLine + compileLog;
+                ptx = "";
+                return compil;
+            }
+
+            if (compil != nvrtcResult.NVRTC_SUCCESS)
+            {
+                string compileLog;
+                nvrtc.GetProgramLog(prog, out compileLog);
+                log = String.Format("{0} error - log : {1}", compil, Environment.NewLine + compileLog);
+                ptx = "";
+                return compil;
+            }
+
+            nvres = nvrtc.GetPTX(prog, out ptx);
+            log = "Compilation OK -- PTX generated";
+            return nvrtcResult.NVRTC_SUCCESS;
+        }
+    }
+}

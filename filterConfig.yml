@@ -1,0 +1,10 @@
+apiRules:
+- exclude:
+    uidRegex: ^Transcoder\.Disassembly\.Warnings$
+    type: Namespace
+- exclude:
+    uidRegex: ^Transcoder\.Disassembly\.Errors$
+    type: Namespace
+- exclude:
+    uidRegex: ^Altimesh\.Hybridizer\.Runtime$
+    type: Namespace
