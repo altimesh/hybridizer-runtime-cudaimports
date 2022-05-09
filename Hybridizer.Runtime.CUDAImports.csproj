@@ -359,6 +359,7 @@
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\cuda.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\ICuda.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\ICudaMarshalling.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-11.0.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-10.0.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-10.1.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-5.5.cs" />
@@ -370,6 +371,7 @@
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-9.0.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-9.1.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-9.2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\CudaUUID_t.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cufft\cufft.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cufft\ICufft.cs" />
     <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-10.0.cs" />

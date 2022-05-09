@@ -64,6 +64,7 @@ namespace Hybridizer.Runtime.CUDAImports
             { "92",  new[] {Cuda_64_92.CUDARTDLL,  Cuda_32_92.CUDARTDLL} },
             { "100", new[] {Cuda_64_100.CUDARTDLL, Cuda_32_100.CUDARTDLL} },
             { "101", new[] { Cuda_64_101.CUDARTDLL } },
+            { "110", new[] { Cuda_64_110.CUDARTDLL } },
             #endif
 
         };
@@ -91,7 +92,9 @@ namespace Hybridizer.Runtime.CUDAImports
             /// finally from environment
             /// if all fails, we default on "80"
             string cudaVersion = String.Empty;
-#if HYBRIDIZER_CUDA_VERSION_101
+#if HYBRIDIZER_CUDA_VERSION_110
+            cudaVersion = "110";
+#elif HYBRIDIZER_CUDA_VERSION_101
             cudaVersion = "101";
 #elif HYBRIDIZER_CUDA_VERSION_100
             cudaVersion = "100";
@@ -191,6 +194,12 @@ namespace Hybridizer.Runtime.CUDAImports
                         instance = new Cuda_64_101();
                     else
                         throw new NotSupportedException("cuda 10.1 dropped 32 bits support");
+                    break;
+                case "110":
+                    if (IntPtr.Size == 8)
+                        instance = new Cuda_64_110();
+                    else
+                        throw new NotSupportedException("cuda 11.0 dropped 32 bits support");
                     break;
                 default:
                     throw new ApplicationException(string.Format("Unknown version of Cuda {0}", cudaVersion));

@@ -14,14 +14,6 @@ namespace Hybridizer.Runtime.CUDAImports
     /// </summary>
     public unsafe partial class cuda
     {
-		[StructLayout(LayoutKind.Sequential, Pack = 4, Size =16)]
-		internal struct cudaUUID_t
-		{
-			[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
-			public char[] bytes;
-		}
-
-
 #if PLATFORM_X64
 		[StructLayout(LayoutKind.Sequential, Pack = 8)]
 #else

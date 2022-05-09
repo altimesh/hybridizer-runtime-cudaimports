@@ -1,5 +1,7 @@
 ﻿/* (c) ALTIMESH 2018 -- all rights reserved */
 using System;
+using System.IO;
+using System.Reflection;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -16,14 +18,17 @@ namespace Hybridizer.Runtime.CUDAImports
     {
         [DllImport("kernel32.dll", EntryPoint="LoadLibrary", SetLastError = true)]
         public static extern IntPtr InnerLoadLibrary(string libName);
+
+
         [DllImport("kernel32.dll", EntryPoint="GetProcAddress")]
         public static extern IntPtr InnerGetProcAddress(IntPtr hModule, [MarshalAs(UnmanagedType.LPStr)] string procName);
 
         public IntPtr LoadLibrary(string libName)
         {
             var ptr = InnerLoadLibrary(libName);
-            if (ptr == IntPtr.Zero && Marshal.GetLastWin32Error() != 0)
-                throw new ApplicationException("Dll load error when loading " + libName + ": " + Marshal.GetLastWin32Error());
+            var error = Marshal.GetLastWin32Error();
+            if (ptr == IntPtr.Zero && error != 0)
+                throw new ApplicationException("Dll load error when loading " + libName + ": " + error);
             return ptr;
         }
 
