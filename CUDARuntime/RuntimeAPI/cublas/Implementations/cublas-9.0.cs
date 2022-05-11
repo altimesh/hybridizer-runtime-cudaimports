@@ -8,9 +8,9 @@ namespace Hybridizer.Runtime.CUDAImports
     /// <summary>
     /// cuBLAS mapping
     /// </summary>
-    public partial class cublas
+    internal partial class cublasImplem
     {
-        private class CUBLAS_64_90 : ICUBLAS
+        internal class CUBLAS_64_90 : ICUBLAS
         {
             public const string CUBLAS_DLL = "cublas64_90.dll";
 

@@ -1,6 +1,8 @@
 ﻿using System;
 namespace Hybridizer.Runtime.CUDAImports
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
     public class NPPI
     {
         static INPPI instance { get; set; }
@@ -170,6 +172,11 @@ namespace Hybridizer.Runtime.CUDAImports
             return instance.LabelMarkersUFGetBufferSize_32u_C1R(oSizeROI, out nBufferSize);
         }
 
+        /// <summary>
+        /// checks for error
+        /// </summary>
+        /// <param name="status"></param>
+        /// <param name="abort"></param>
         public static void ERROR_CHECK(NppStatus status, bool abort = true)
         {
             if(status != NppStatus.SUCCESS)
@@ -192,4 +199,6 @@ namespace Hybridizer.Runtime.CUDAImports
             return cudaVersion;
         }
     }
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 }

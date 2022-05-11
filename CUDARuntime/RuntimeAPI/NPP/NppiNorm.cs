@@ -6,6 +6,9 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// type of norms -- enumerator
+    /// </summary>
     [IntrinsicInclude("npp.h")]
     [IntrinsicType("NppiNorm")]
     public enum NppiNorm

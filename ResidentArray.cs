@@ -800,6 +800,10 @@ namespace Hybridizer.Runtime.CUDAImports
 
     }
 
+    /// <summary>
+    /// A resident array hosting generic data
+    /// </summary>
+    /// <typeparam name="T">element type (must be copyable by memcpy -- sizable and blittable)</typeparam>
 	public unsafe class ResidentArrayGeneric<T> : IResidentData, IDisposable where T: struct
 	{
 #pragma warning disable 1591

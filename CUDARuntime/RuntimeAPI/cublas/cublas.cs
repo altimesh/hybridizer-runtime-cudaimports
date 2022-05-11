@@ -2,13 +2,14 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
+using static Hybridizer.Runtime.CUDAImports.cublasImplem;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
     /// <summary>
     /// cuBLAS mapping
     /// </summary>
-    public partial class cublas
+    public class cublas
     {
         // TODO : depend on configuration
         static ICUBLAS instance  { get; set; }

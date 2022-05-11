@@ -12,7 +12,7 @@ namespace Hybridizer.Runtime.CUDAImports
     /// <summary>
     /// CUDA runtime API wrapper
     /// </summary>
-    public unsafe partial class cuda
+    internal unsafe partial class CudaImplem
     {
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
         internal struct cudaDeviceProp_80
@@ -365,7 +365,7 @@ namespace Hybridizer.Runtime.CUDAImports
             public int concurrentManagedAccess;
         };
 
-        private class Cuda_32_80 : ICuda
+        internal class Cuda_32_80 : ICuda
         {
 #if MONO
             internal const string CUDARTDLL = "libcudart.so";
@@ -903,7 +903,7 @@ namespace Hybridizer.Runtime.CUDAImports
             public cudaError_t LaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem,
                 cudaStream_t stream)
             {
-                return instance.LaunchKernel(func, gridDim, blockDim, args, sharedMem, stream);
+                return cudaLaunchKernel(func, gridDim, blockDim, args, sharedMem, stream);
             }
 
             #endregion
@@ -1449,7 +1449,7 @@ namespace Hybridizer.Runtime.CUDAImports
             public cudaError_t GetMipmappedArrayLevel(out cudaArray_t levelArray,
                 cudaMipmappedArray_const_t mipmappedArray, uint level)
             {
-                return instance.GetMipmappedArrayLevel(out levelArray, mipmappedArray, level);
+                return GetMipmappedArrayLevel(out levelArray, mipmappedArray, level);
             }
 
             #endregion
@@ -1640,7 +1640,7 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
 
-        private class Cuda_64_80 : ICuda
+        internal class Cuda_64_80 : ICuda
         {
 #if MONO
             internal const string CUDARTDLL = "libcudart.so";
@@ -2178,7 +2178,7 @@ namespace Hybridizer.Runtime.CUDAImports
             public cudaError_t LaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem,
                 cudaStream_t stream)
             {
-                return instance.LaunchKernel(func, gridDim, blockDim, args, sharedMem, stream);
+                return cudaLaunchKernel(func, gridDim, blockDim, args, sharedMem, stream);
             }
 
             #endregion
@@ -2723,7 +2723,7 @@ namespace Hybridizer.Runtime.CUDAImports
             public cudaError_t GetMipmappedArrayLevel(out cudaArray_t levelArray,
                 cudaMipmappedArray_const_t mipmappedArray, uint level)
             {
-                return instance.GetMipmappedArrayLevel(out levelArray, mipmappedArray, level);
+                return GetMipmappedArrayLevel(out levelArray, mipmappedArray, level);
             }
 
 

@@ -6,6 +6,8 @@ using size_t = System.UIntPtr ;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 	public interface ICurand
 	{
 		curandStatus_t curandCreateGenerator(out curandGenerator_t generator, curandRngType_t type);
@@ -20,6 +22,7 @@ namespace Hybridizer.Runtime.CUDAImports
 		curandStatus_t curandSetPseudoRandomGeneratorSeed(curandGenerator_t prngGPU, UInt64 seed);
 		curandStatus_t curandSetGeneratorOrdering(curandGenerator_t prngGPU, curandOrdering_t order);
 		curandStatus_t curandSetGeneratorOffset(curandGenerator_t generator, UInt64 offset);
-	}   
-   
+	}
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
 }

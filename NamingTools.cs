@@ -72,6 +72,7 @@ namespace Altimesh.Hybridizer.Runtime
         /// mangling of typename
         /// </summary>
         /// <param name="t"></param>
+        /// <param name="SimplifyGenerics"></param>
         /// <returns></returns>
         public static string QualifiedTypeName(Type t, bool SimplifyGenerics = true)
         {

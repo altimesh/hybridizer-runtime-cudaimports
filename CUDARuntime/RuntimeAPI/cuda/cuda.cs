@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Reflection;
+using static Hybridizer.Runtime.CUDAImports.CudaImplem;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
@@ -13,9 +14,9 @@ namespace Hybridizer.Runtime.CUDAImports
     /// CUDA runtime API wrapper
     /// </summary>
     [Guid("553B61F4-8D61-4570-8791-B666857F987A")]
-    public unsafe partial class cuda
+    public unsafe class cuda
     {
-        private static T StructConvert<T>(object o) where T : new()
+        internal static T StructConvert<T>(object o) where T : new()
         {
             Type t = o.GetType();
             object res = new T();
@@ -53,16 +54,16 @@ namespace Hybridizer.Runtime.CUDAImports
             #if MONO
             { "80", new[] {Cuda_64_80.CUDARTDLL, Cuda_32_80.CUDARTDLL} },
             #else
-            { "55",  new[] {Cuda_64_55.CUDARTDLL,  Cuda_32_55.CUDARTDLL} }, 
-            { "60",  new[] {Cuda_64_60.CUDARTDLL,  Cuda_32_60.CUDARTDLL} },
-            { "65",  new[] {Cuda_64_65.CUDARTDLL,  Cuda_32_65.CUDARTDLL} },
-            { "70",  new[] {Cuda_64_70.CUDARTDLL,  Cuda_32_70.CUDARTDLL} },
-            { "75",  new[] {Cuda_64_75.CUDARTDLL,  Cuda_32_75.CUDARTDLL} },
-            { "80",  new[] {Cuda_64_80.CUDARTDLL,  Cuda_32_80.CUDARTDLL} },
-            { "90",  new[] {Cuda_64_90.CUDARTDLL,  Cuda_32_90.CUDARTDLL} },
-            { "91",  new[] {Cuda_64_91.CUDARTDLL,  Cuda_32_91.CUDARTDLL} },
-            { "92",  new[] {Cuda_64_92.CUDARTDLL,  Cuda_32_92.CUDARTDLL} },
-            { "100", new[] {Cuda_64_100.CUDARTDLL, Cuda_32_100.CUDARTDLL} },
+            { "55",  new[] { Cuda_64_55.CUDARTDLL,  Cuda_32_55.CUDARTDLL} }, 
+            { "60",  new[] { Cuda_64_60.CUDARTDLL,  Cuda_32_60.CUDARTDLL} },
+            { "65",  new[] { Cuda_64_65.CUDARTDLL,  Cuda_32_65.CUDARTDLL} },
+            { "70",  new[] { Cuda_64_70.CUDARTDLL,  Cuda_32_70.CUDARTDLL} },
+            { "75",  new[] { Cuda_64_75.CUDARTDLL,  Cuda_32_75.CUDARTDLL} },
+            { "80",  new[] { Cuda_64_80.CUDARTDLL,  Cuda_32_80.CUDARTDLL} },
+            { "90",  new[] { Cuda_64_90.CUDARTDLL,  Cuda_32_90.CUDARTDLL} },
+            { "91",  new[] { Cuda_64_91.CUDARTDLL,  Cuda_32_91.CUDARTDLL} },
+            { "92",  new[] { Cuda_64_92.CUDARTDLL,  Cuda_32_92.CUDARTDLL} },
+            { "100", new[] { Cuda_64_100.CUDARTDLL, Cuda_32_100.CUDARTDLL} },
             { "101", new[] { Cuda_64_101.CUDARTDLL } },
             { "110", new[] { Cuda_64_110.CUDARTDLL } },
             #endif
@@ -76,6 +77,10 @@ namespace Hybridizer.Runtime.CUDAImports
 
         /// <summary>
         /// returns the cuda runtime version
+        /// if cudaimports is built with /p:DefineConstants="HYBRIDIZER_CUDA_VERSION_xx", we take that value first
+        /// then we try to find it in application settings with key "hybridizer.cudaruntimeversion"
+        /// finally from environment "HYBRIDIZER_CUDA_VERSION"
+        /// if all fails, we default on "80"
         /// </summary>
         /// <returns></returns>
         public static string GetCudaVersion()
@@ -87,10 +92,6 @@ namespace Hybridizer.Runtime.CUDAImports
                         if (module.ModuleName == dllName) 
                             return k;
             
-            /// if cudaimports is built with /p:DefineConstants="HYBRIDIZER_CUDA_VERSION_xx", we take that value first
-            /// then we try to find it in application settings
-            /// finally from environment
-            /// if all fails, we default on "80"
             string cudaVersion = String.Empty;
 #if HYBRIDIZER_CUDA_VERSION_110
             cudaVersion = "110";

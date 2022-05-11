@@ -6,6 +6,8 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
     interface INPPI
     {
         NppStatus CompressMarkerLabelsGetBufferSize_32u8u_C1R(int maxLabel, out int bufferSize);
@@ -61,4 +63,6 @@ namespace Hybridizer.Runtime.CUDAImports
 
         NppStatus BoundSegments_16u_C1IR_Ctx(IntPtr pSrcDst, int nSrcDstStep, NppiSize oSizeROI, ushort nBorderVal, NppStreamContext ctx);
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
 }

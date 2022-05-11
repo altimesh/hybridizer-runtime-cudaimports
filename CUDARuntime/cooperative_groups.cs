@@ -244,7 +244,7 @@ namespace Hybridizer.Runtime.CUDAImports
         [IntrinsicFunction("cooperative_groups::tiled_partition<1>")]
         public static thread_block_tile_1 tile_partition_1(thread_block group) { return new thread_block_tile_1(); }
 
-        /// TODO : tile_partition of thread_block_tile<S>
+        // TODO : tile_partition of thread_block_tile<S>
     }
 
     /// <summary>

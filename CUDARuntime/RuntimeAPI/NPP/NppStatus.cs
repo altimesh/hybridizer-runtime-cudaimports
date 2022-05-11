@@ -6,6 +6,13 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+    /// <summary>
+    /// Error Status Codes.
+    /// Almost all NPP function return error-status information using these return codes.Negative return codes indicate errors, positive return codes indicate warnings, a return code of 0 indicates success.
+    /// </summary>
     [IntrinsicInclude("npp.h")]
     [IntrinsicType("NppStatus")]
     public enum NppStatus
@@ -186,4 +193,6 @@ namespace Hybridizer.Runtime.CUDAImports
         /// </summary>
         MISALIGNED_DST_ROI_WARNING = 10000,
     }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

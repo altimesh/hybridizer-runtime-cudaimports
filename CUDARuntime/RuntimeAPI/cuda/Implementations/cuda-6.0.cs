@@ -12,7 +12,7 @@ namespace Hybridizer.Runtime.CUDAImports
     /// <summary>
     /// CUDA runtime API wrapper
     /// </summary>
-    public unsafe partial class cuda
+    internal unsafe partial class CudaImplem
     {
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
         internal struct cudaDeviceProp_60
@@ -345,7 +345,7 @@ namespace Hybridizer.Runtime.CUDAImports
             public int multiGpuBoardGroupID;
         };
 
-        private class Cuda_32_60 : ICuda
+        internal class Cuda_32_60 : ICuda
         {
             internal const string CUDARTDLL = "cudart32_60.dll";
 
@@ -1418,7 +1418,7 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
 
-        private class Cuda_64_60 : ICuda
+        internal class Cuda_64_60 : ICuda
         {
             internal const string CUDARTDLL = "cudart64_60.dll";
 

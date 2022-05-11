@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
     /// <summary>
     /// Python function -- requires python feature in license
     /// </summary>
@@ -17,7 +20,7 @@ namespace Hybridizer.Runtime.CUDAImports
     {
         [HybridizerIgnore]
         public Delegate Del;
-        
+
         private IntPtr _funcptr;
         public IntPtr funcptr { get { return _funcptr; } set { _funcptr = value; } }
         
@@ -129,4 +132,6 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
     }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

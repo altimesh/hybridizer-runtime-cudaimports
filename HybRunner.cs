@@ -185,6 +185,10 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
 
+        /// <summary>
+        /// registers an an additional dll to marshaller
+        /// </summary>
+        /// <param name="fileName"></param>
         public void RegisterAdditionalDLL(string fileName)
         {
             _marshaller.RegisterDLL(fileName);
@@ -257,8 +261,17 @@ namespace Hybridizer.Runtime.CUDAImports
             get { return _flavor == HybridizerFlavor.CUDA && !cudaStream_t.NO_STREAM.Equals(_stream); }
         }
 
+        /// <summary>
+        /// Does runner use grid synchronization (modern devices only)
+        /// </summary>
         public bool UseGridSync { get; set; }
 
+        /// <summary>
+        /// sets grid sync to true or false
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        /// <exception cref="ApplicationException">thrown if cuda version is &lt; 9.0</exception>
         public HybRunner SetGridSync(bool value)
         {
             if(value && int.Parse(GetCudaVersion()) < 90)
@@ -503,7 +516,6 @@ namespace Hybridizer.Runtime.CUDAImports
         /// satellite dlls must have a name ending with the flavor (AVX/AVX2/AVX512)
         /// LINUX ONLY
         /// </summary>
-        /// <param name="dllName"></param>
         /// <returns>The appropriate HybRunner</returns>
         public static HybRunner AutoCPU()
         {

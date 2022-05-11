@@ -12,7 +12,7 @@ namespace Hybridizer.Runtime.CUDAImports
     /// <summary>
     /// CUDA runtime API wrapper
     /// </summary>
-    public unsafe partial class cuda
+    internal unsafe partial class CudaImplem
     {
         // updated from CUDA 9.1
         [StructLayout(LayoutKind.Sequential, Pack = 4)]
@@ -322,7 +322,7 @@ namespace Hybridizer.Runtime.CUDAImports
         };
 
         // temporary implem -- copied from 8.0
-        private class Cuda_32_91 : ICuda
+        internal class Cuda_32_91 : ICuda
         {
 #if MONO
             internal const string CUDARTDLL = "libcudart.so";
@@ -600,7 +600,7 @@ namespace Hybridizer.Runtime.CUDAImports
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaLaunchKernel")]
             public static extern cudaError_t cudaLaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem, cudaStream_t stream);
-            public cudaError_t LaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem, cudaStream_t stream) { return instance.LaunchKernel(func, gridDim, blockDim, args, sharedMem, stream); }
+            public cudaError_t LaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem, cudaStream_t stream) { return cudaLaunchKernel(func, gridDim, blockDim, args, sharedMem, stream); }
 
             #endregion
 
@@ -805,7 +805,7 @@ namespace Hybridizer.Runtime.CUDAImports
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaGetMipmappedArrayLevel")]
             static extern cudaError_t cudaGetMipmappedArrayLevel(out cudaArray_t levelArray, cudaMipmappedArray_const_t mipmappedArray, uint level);
-            public cudaError_t GetMipmappedArrayLevel(out cudaArray_t levelArray, cudaMipmappedArray_const_t mipmappedArray, uint level) { return instance.GetMipmappedArrayLevel(out levelArray, mipmappedArray, level); }
+            public cudaError_t GetMipmappedArrayLevel(out cudaArray_t levelArray, cudaMipmappedArray_const_t mipmappedArray, uint level) { return cudaGetMipmappedArrayLevel(out levelArray, mipmappedArray, level); }
 
             #endregion
 
@@ -951,7 +951,7 @@ namespace Hybridizer.Runtime.CUDAImports
         }
 
         // temporary implem -- copied from 8.0
-        private class Cuda_64_91 : ICuda
+        internal class Cuda_64_91 : ICuda
         {
 #if MONO
             internal const string CUDARTDLL = "libcudart.so";
@@ -1229,7 +1229,7 @@ namespace Hybridizer.Runtime.CUDAImports
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaLaunchKernel")]
             public static extern cudaError_t cudaLaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem, cudaStream_t stream);
-            public cudaError_t LaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem, cudaStream_t stream) { return instance.LaunchKernel(func, gridDim, blockDim, args, sharedMem, stream); }
+            public cudaError_t LaunchKernel(IntPtr func, dim3 gridDim, dim3 blockDim, IntPtr args, size_t sharedMem, cudaStream_t stream) { return cudaLaunchKernel(func, gridDim, blockDim, args, sharedMem, stream); }
 
             #endregion
 
@@ -1433,7 +1433,7 @@ namespace Hybridizer.Runtime.CUDAImports
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaGetMipmappedArrayLevel")]
             static extern cudaError_t cudaGetMipmappedArrayLevel(out cudaArray_t levelArray, cudaMipmappedArray_const_t mipmappedArray, uint level);
-            public cudaError_t GetMipmappedArrayLevel(out cudaArray_t levelArray, cudaMipmappedArray_const_t mipmappedArray, uint level) { return instance.GetMipmappedArrayLevel(out levelArray, mipmappedArray, level); }
+            public cudaError_t GetMipmappedArrayLevel(out cudaArray_t levelArray, cudaMipmappedArray_const_t mipmappedArray, uint level) { return cudaGetMipmappedArrayLevel(out levelArray, mipmappedArray, level); }
 
 
             /*

@@ -4,6 +4,8 @@ using System.Runtime.InteropServices;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 	public interface ICUFFT
 	{
 		cufftResult Create(out cufftHandle plan);
@@ -42,4 +44,6 @@ namespace Hybridizer.Runtime.CUDAImports
 		cufftResult XtMakePlanMany(cufftHandle plan, int rank, IntPtr n, IntPtr inembed, long istride, long idist, cudaDataType_t inputtype, IntPtr onembed, long ostride, long odist, cudaDataType_t outputtype, long batch, out size_t workSize, cudaDataType_t executiontype);
 		// TODO: cufftXt...
 	}
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+
 }

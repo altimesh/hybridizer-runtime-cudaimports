@@ -12,9 +12,9 @@ namespace Hybridizer.Runtime.CUDAImports
     /// <summary>
     /// CUDA runtime API wrapper
     /// </summary>
-    public unsafe partial class cuda
+    internal unsafe partial class CudaImplem
     {
-        private class Cuda_32_75 : ICuda
+        internal class Cuda_32_75 : ICuda
         {
             internal const string CUDARTDLL = "cudart32_75.dll";
 
@@ -1195,7 +1195,7 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
 
-        private class Cuda_64_75 : ICuda
+        internal class Cuda_64_75 : ICuda
         {
             internal const string CUDARTDLL = "cudart64_75.dll";
 
