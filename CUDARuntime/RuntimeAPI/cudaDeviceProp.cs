@@ -317,7 +317,29 @@ namespace Hybridizer.Runtime.CUDAImports
         /// </summary>
         public int directManagedMemAccessFromHost;
 
+        // 11.0
+        /// <summary>
+        /// Device's maximum l2 persisting lines capacity setting in bytes
+        /// </summary>
+        public int persistingL2CacheMaxSize;
+        /// <summary>
+        /// Maximum number of resident blocks per multiprocessor
+        /// </summary>
+        public int maxBlocksPerMultiProcessor;
+        /// <summary>
+        /// The maximum value of ::cudaAccessPolicyWindow::num_bytes.
+        /// </summary>
+        public int accessPolicyMaxWindowSize;
+        /// <summary>
+        /// Shared memory reserved by CUDA driver per block in bytes
+        /// </summary>
+        public size_t reservedSharedMemPerBlock; 
 
+
+        /// <summary>
+        /// get cuda core count
+        /// </summary>
+        /// <returns></returns>
         public int GetCudaCoresCount()
         {
             int cores = 0;
@@ -342,6 +364,18 @@ namespace Hybridizer.Runtime.CUDAImports
                     break;
                 case 7: // https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capability-7-x
                     return 64 * mp;
+                case 8: // https://docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-capability-8-x
+                    if (minor == 0)
+                    {
+                        return 64 * mp;
+                    }
+                    else if (minor == 6)
+                    {
+                        return 123 * mp;
+                    }
+                    else
+                        Console.Error.WriteLine("Unknown device type");
+                    break;
                 default:
                     Console.Error.WriteLine("Unknown device type");
                     break;

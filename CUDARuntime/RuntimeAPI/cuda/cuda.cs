@@ -41,12 +41,24 @@ namespace Hybridizer.Runtime.CUDAImports
         [IntrinsicConstant("cudaInvalidDeviceId")]
         public const int InvalidDeviceId = -2;
 
+        /// <summary>
+        /// verbosity
+        /// </summary>
         public enum VERBOSITY
         {
+            /// <summary>
+            /// none
+            /// </summary>
             None,
+            /// <summary>
+            /// verbose
+            /// </summary>
             Verbose
         }
 
+        /// <summary>
+        /// log verbosity
+        /// </summary>
         public static VERBOSITY s_VERBOSITY = VERBOSITY.None;
 
         private static readonly Dictionary<string, string[]> CUDA_DLLS = new Dictionary<string, string[]>
@@ -574,12 +586,17 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <param name="array">The cudaArray to get info for</param>
         /// <returns>cudaSuccess, cudaErrorInvalidValue</returns>
         [IntrinsicFunction("cudaArrayGetInfo")]
-        public static cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent, out uint flags, cudaArray_t array) { return instance.ArrayGetInfo(out desc, out extent, out flags, array); }
+        public static cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent, out uint flags, cudaArray_t array) { return instance.ArrayGetInfo(out desc, out extent, out flags, array); }
         /// <summary>
         /// Frees memory on the device
         /// </summary>
         [IntrinsicFunction("cudaFree")]
         public static cudaError_t Free (IntPtr dev) { return instance.Free (dev) ; }
+        /// <summary>
+        /// Frees memory from device
+        /// </summary>
+        /// <param name="dev"></param>
+        /// <returns></returns>
         [IntrinsicFunction("cudaFree")]
         public static cudaError_t Free(void* dev) { return instance.Free(new IntPtr(dev)); }
         /// <summary>
@@ -590,6 +607,11 @@ namespace Hybridizer.Runtime.CUDAImports
         ///  Frees page-locked memory
         /// </summary>
         public static cudaError_t FreeHost (IntPtr ptr) { return instance.FreeHost (ptr) ; }
+        /// <summary>
+        /// Frees page-locked memory
+        /// </summary>
+        /// <param name="ptr"></param>
+        /// <returns></returns>
         public static cudaError_t FreeHost (void* ptr) { return instance.FreeHost(new IntPtr(ptr)); }
         /// <summary>
         /// Frees a mipmapped array on the device
@@ -603,6 +625,9 @@ namespace Hybridizer.Runtime.CUDAImports
         /// Finds the address associated with a CUDA symbol
         /// </summary>
         public static cudaError_t GetSymbolAddress(out IntPtr devPtr, string symbol) { return instance.GetSymbolAddress(out devPtr, symbol); }
+        /// <summary>
+        /// Finds the address associated with a CUDA symbol
+        /// </summary>
         public static cudaError_t GetSymbolAddress(out void* devPtr, string symbol) { IntPtr res; cudaError_t cuer = instance.GetSymbolAddress(out res, symbol); devPtr = res.ToPointer(); return cuer; }
         /// <summary>
         /// Finds the size of the object associated with a CUDA symbol
@@ -612,21 +637,33 @@ namespace Hybridizer.Runtime.CUDAImports
         /// Allocates page-locked memory on the host
         /// </summary>
         public static cudaError_t HostAlloc (out IntPtr ptr, size_t size, cudaHostAllocFlags flags) { return instance.HostAlloc (out ptr, size, flags) ; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t HostAlloc (out void* ptr, size_t size, cudaHostAllocFlags flags) { IntPtr res; cudaError_t cuer = instance.HostAlloc(out res, size, flags); ptr = res.ToPointer(); return cuer; }
         /// <summary>
         /// asses back device pointer of mapped host memory allocated by cudaHostAlloc or registered by cudaHostRegister
         /// </summary>
         public static cudaError_t HostGetDevicePointer (out IntPtr pdev, IntPtr phost, cudaGetDevicePointerFlags flags) { return instance.HostGetDevicePointer (out pdev, phost, flags) ; }
+        /// <summary>
+        /// asses back device pointer of mapped host memory allocated by cudaHostAlloc or registered by cudaHostRegister
+        /// </summary>
         public static cudaError_t HostGetDevicePointer(out void* pdev, IntPtr phost, cudaGetDevicePointerFlags flags) { IntPtr res; cudaError_t cuer = instance.HostGetDevicePointer(out res, phost, flags); pdev = res.ToPointer(); return cuer; }
         /// <summary>
         /// Passes back flags used to allocate pinned host memory allocated by cudaHostAlloc
         /// </summary>
         public static cudaError_t HostGetFlags (out cudaHostAllocFlags flags, IntPtr phost) { return instance.HostGetFlags (out flags, phost) ; }
+        /// <summary>
+        /// Passes back flags used to allocate pinned host memory allocated by cudaHostAlloc
+        /// </summary>
         public static cudaError_t HostGetFlags (out cudaHostAllocFlags flags, void* phost) { return instance.HostGetFlags(out flags, new IntPtr(phost)); }
         /// <summary>
         /// Registers an existing host memory range for use by CUDA
         /// </summary>
         public static cudaError_t HostRegister(IntPtr ptr, size_t size, uint flags) { return instance.HostRegister(ptr, size, flags); }
+        /// <summary>
+        /// Registers an existing host memory range for use by CUDA
+        /// </summary>
         public static cudaError_t HostRegister(void* ptr, size_t size, uint flags) { return instance.HostRegister(new IntPtr(ptr), size, flags); }
         /// <summary>
         /// Unregisters a memory range that was registered with cudaHostRegister
@@ -637,36 +674,75 @@ namespace Hybridizer.Runtime.CUDAImports
         /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out IntPtr dev, size_t size) { return instance.Malloc(out dev, size); }
+
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out void* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = res.ToPointer(); return cuer; }
+
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out int* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (int*)res.ToPointer(); return cuer; }
+        
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out float* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (float*)res.ToPointer(); return cuer; }
+        
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out double* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (double*)res.ToPointer(); return cuer; }
+
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out uint* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (uint*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out long* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (long*)res.ToPointer(); return cuer; }
+
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out ulong* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (ulong*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out short* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (short*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out ushort* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (ushort*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out byte* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (byte*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory on the device
+        /// </summary>
         [IntrinsicFunction("cudaMalloc")]
         public static cudaError_t Malloc(out sbyte* dev, size_t size) { IntPtr res; cudaError_t cuer = instance.Malloc(out res, size); dev = (sbyte*)res.ToPointer(); return cuer; }
         /// <summary>
         /// Allocates memory on the device
         /// </summary>
-        public static cudaError_t Malloc3D (ref cudaPitchedPtr ptr, cudaExtent extent) { return instance.Malloc3D (ref ptr, extent) ; }
+        public static cudaError_t Malloc3D (ref cudaPitchedPtr ptr, cudaFuncAttributes extent) { return instance.Malloc3D (ref ptr, extent) ; }
         /// <summary>
         /// Allocates memory on the device
         /// </summary>
-        public static cudaError_t Malloc3DArray (out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaExtent extent, cudaMallocArrayFlags flags) { return instance.Malloc3DArray (out arr, ref chan, extent, flags) ; }
+        public static cudaError_t Malloc3DArray (out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaFuncAttributes extent, cudaMallocArrayFlags flags) { return instance.Malloc3DArray (out arr, ref chan, extent, flags) ; }
         /// <summary>
         /// Allocates memory on the device
         /// </summary>
@@ -675,55 +751,154 @@ namespace Hybridizer.Runtime.CUDAImports
         /// Allocates page-locked memory on the host
         /// </summary>
         public static cudaError_t MallocHost (out IntPtr ptr, size_t size) { return instance.MallocHost (out ptr, size) ; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out void* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out int* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (int*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out uint* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (uint*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out long* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (long*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out ulong* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (ulong*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out float* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (float*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out double* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (double*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out byte* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (byte*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out sbyte* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (sbyte*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out short* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (short*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates page-locked memory on the host
+        /// </summary>
         public static cudaError_t MallocHost(out ushort* ptr, size_t size) { IntPtr res; cudaError_t cuer = instance.MallocHost(out res, size); ptr = (ushort*)res.ToPointer(); return cuer; }
         /// <summary>
         /// Allocates memory that will be automatically managed by the Unified Memory system
         /// </summary>
         public static cudaError_t MallocManaged(out IntPtr devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { return instance.MallocManaged(out devPtr, size, flags); }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out void* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out int* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (int*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out uint* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (uint*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out long* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (long*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out ulong* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (ulong*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out float* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (float*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out double* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (double*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out byte* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (byte*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out sbyte* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (sbyte*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out short* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (short*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates memory that will be automatically managed by the Unified Memory system
+        /// </summary>
         public static cudaError_t MallocManaged(out ushort* devPtr, size_t size, uint flags = (uint)cudaMemAttach.cudaMemAttachGlobal) { IntPtr res; cudaError_t cuer = instance.MallocManaged(out res, size, flags); devPtr = (ushort*)res.ToPointer(); return cuer; }
         /// <summary>
         /// Allocate a mipmapped array on the device
         /// </summary>
-        public static cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray, ref cudaChannelFormatDesc desc, cudaExtent extent, uint numLevels, uint flags = 0) { return instance.MallocMipmappedArray(out mipmappedArray, ref desc, extent, numLevels, flags); }
+        public static cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray, ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, uint numLevels, uint flags = 0) { return instance.MallocMipmappedArray(out mipmappedArray, ref desc, extent, numLevels, flags); }
         /// <summary>
         /// Allocates pitched memory on the device
         /// </summary>
         public static cudaError_t MallocPitch(out IntPtr devptr, out size_t pitch, size_t width, size_t height) { return instance.MallocPitch(out devptr, out pitch, width, height); }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out void* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out int* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (int*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out uint* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (uint*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out long* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (long*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out ulong* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (ulong*)res.ToPointer(); return cuer; }
-        public static cudaError_t MallocPitch(out float* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (float*)res.ToPointer(); return cuer; }
+
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>        public static cudaError_t MallocPitch(out float* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (float*)res.ToPointer(); return cuer; }
         public static cudaError_t MallocPitch(out double* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (double*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out byte* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (byte*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out sbyte* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (sbyte*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out short* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (short*)res.ToPointer(); return cuer; }
+        /// <summary>
+        /// Allocates pitched memory on the device
+        /// </summary>
         public static cudaError_t MallocPitch(out ushort* devptr, out size_t pitch, size_t width, size_t height) { IntPtr res; cudaError_t cuer = instance.MallocPitch(out res, out pitch, width, height); devptr = (ushort*)res.ToPointer(); return cuer; }
         /// <summary>
         ///  Advise about the usage of a given memory range
         /// </summary>
         public static cudaError_t MemAdvise(IntPtr devptr, size_t count, cudaMemmoryAdvise advice, int device) { return instance.MemAdvise(devptr, count, advice, device); }
+        /// <summary>
+        ///  Advise about the usage of a given memory range
+        /// </summary>
         public static cudaError_t MemAdvise(void* devptr, size_t count, cudaMemmoryAdvise advice, int device) { return instance.MemAdvise(new IntPtr(devptr), count, advice, device); }
         /// <summary>
         /// Gets free and total device memory
@@ -733,8 +908,17 @@ namespace Hybridizer.Runtime.CUDAImports
         ///  Prefetches memory to the specified destination device
         /// </summary>
         public static cudaError_t MemPrefetchAsync (IntPtr devptr, size_t count, int dstDevice, cudaStream_t stream) { return instance.MemPrefetchAsync(devptr, count, dstDevice, stream) ; }
+        /// <summary>
+        ///  Prefetches memory to the specified destination device
+        /// </summary>
         public static cudaError_t MemPrefetchAsync(void* devptr, size_t count, int dstDevice, cudaStream_t stream) { return instance.MemPrefetchAsync(new IntPtr(devptr), count, dstDevice, stream); }
+        /// <summary>
+        ///  Prefetches memory to the specified destination device
+        /// </summary>
         public static cudaError_t MemPrefetchAsync(IntPtr devptr, size_t count, int dstDevice) { return instance.MemPrefetchAsync(devptr, count, dstDevice, cudaStream_t.NO_STREAM); }
+        /// <summary>
+        ///  Prefetches memory to the specified destination device
+        /// </summary>
         public static cudaError_t MemPrefetchAsync(void* devptr, size_t count, int dstDevice) { return instance.MemPrefetchAsync(new IntPtr(devptr), count, dstDevice, cudaStream_t.NO_STREAM); }
         /// <summary>
         /// Copies data between host and device
@@ -744,15 +928,33 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <param name="src">source pointer</param>
         /// </summary>
         public static cudaError_t Memcpy(IntPtr dest, IntPtr src, size_t size, cudaMemcpyKind kind) { return instance.Memcpy(dest, src, size, kind); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy(void* dest, IntPtr src, size_t size, cudaMemcpyKind kind) { return instance.Memcpy(new IntPtr(dest), src, size, kind); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy(IntPtr dest, void* src, size_t size, cudaMemcpyKind kind) { return instance.Memcpy(dest, new IntPtr(src), size, kind); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy(void* dest, void* src, size_t size, cudaMemcpyKind kind) { return instance.Memcpy(new IntPtr(dest), new IntPtr(src), size, kind); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t Memcpy2D (IntPtr dest, size_t dpitch, IntPtr src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2D (dest, dpitch, src, spitch, width, height, kind) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy2D(void* dest, size_t dpitch, IntPtr src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2D(new IntPtr(dest), dpitch, src, spitch, width, height, kind); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy2D(IntPtr dest, size_t dpitch, void* src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2D(dest, dpitch, new IntPtr(src), spitch, width, height, kind); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy2D(void* dest, size_t dpitch, void* src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2D(new IntPtr(dest), dpitch, new IntPtr(src), spitch, width, height, kind); }
         /// <summary>
         /// Copies data between host and device
@@ -763,31 +965,52 @@ namespace Hybridizer.Runtime.CUDAImports
         /// </summary>
         [IntrinsicFunction("cudaMemcpy2DAsync")]
         public static cudaError_t Memcpy2DAsync (IntPtr dest, size_t dpitch, IntPtr src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DAsync (dest, dpitch, src, spitch, width, height, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         [IntrinsicFunction("cudaMemcpy2DAsync")]
         public static cudaError_t Memcpy2DAsync(void* dest, size_t dpitch, IntPtr src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DAsync(new IntPtr(dest), dpitch, src, spitch, width, height, kind, stream); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         [IntrinsicFunction("cudaMemcpy2DAsync")]
         public static cudaError_t Memcpy2DAsync(IntPtr dest, size_t dpitch, void* src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DAsync(dest, dpitch, new IntPtr(src), spitch, width, height, kind, stream); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         [IntrinsicFunction("cudaMemcpy2DAsync")]
         public static cudaError_t Memcpy2DAsync(void* dest, size_t dpitch, void* src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DAsync(new IntPtr(dest), dpitch, new IntPtr(src), spitch, width, height, kind, stream); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t Memcpy2DFromArray (IntPtr dest, size_t dpitch, cudaArray_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2DFromArray (dest, dpitch, src, wOffset, hOffset, width, height, kind) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy2DFromArray(void* dest, size_t dpitch, cudaArray_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2DFromArray(new IntPtr(dest), dpitch, src, wOffset, hOffset, width, height, kind); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t Memcpy2DFromArrayAsync (IntPtr dest, size_t dpitch, cudaArray_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DFromArrayAsync (dest, dpitch, src, wOffset, hOffset, width, height, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy2DFromArrayAsync(void* dest, size_t dpitch, cudaArray_t src, size_t wOffset, size_t hOffset, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DFromArrayAsync(new IntPtr(dest), dpitch, src, wOffset, hOffset, width, height, kind, stream); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t Memcpy2DToArray (cudaArray_t dest, size_t wOffsetDest, size_t hOffsetDest, IntPtr src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2DToArray (dest, wOffsetDest, hOffsetDest, src, spitch, width, height, kind) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy2DToArray(cudaArray_t dest, size_t wOffsetDest, size_t hOffsetDest, void* src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind) { return instance.Memcpy2DToArray(dest, wOffsetDest, hOffsetDest, new IntPtr(src), spitch, width, height, kind); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t Memcpy2DToArrayAsync (cudaArray_t dest, size_t wOffsetDest, size_t hOffsetDest, IntPtr src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DToArrayAsync (dest, wOffsetDest, hOffsetDest, src, spitch, width, height, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t Memcpy2DToArrayAsync(cudaArray_t dest, size_t wOffsetDest, size_t hOffsetDest, void* src, size_t spitch, size_t width, size_t height, cudaMemcpyKind kind, cudaStream_t stream) { return instance.Memcpy2DToArrayAsync(dest, wOffsetDest, hOffsetDest, new IntPtr(src), spitch, width, height, kind, stream); }
         /// <summary>
         /// Copies data between host and device
@@ -815,96 +1038,161 @@ namespace Hybridizer.Runtime.CUDAImports
         /// </summary>
         [IntrinsicFunction("cudaMemcpyAsync")]
         public static cudaError_t MemcpyAsync (IntPtr dest, IntPtr src, size_t size, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyAsync (dest, src, size, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         [IntrinsicFunction("cudaMemcpyAsync")]
         public static cudaError_t MemcpyAsync(void* dest, IntPtr src, size_t size, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyAsync(new IntPtr(dest), src, size, kind, stream); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         [IntrinsicFunction("cudaMemcpyAsync")]
         public static cudaError_t MemcpyAsync(IntPtr dest, void* src, size_t size, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyAsync(dest, new IntPtr(src), size, kind, stream); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         [IntrinsicFunction("cudaMemcpyAsync")]
         public static cudaError_t MemcpyAsync(void* dest, void* src, size_t size, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyAsync(new IntPtr(dest), new IntPtr(src), size, kind, stream); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t MemcpyFromArray (IntPtr dest, cudaArray_t src, size_t wOffset, size_t hOffset, size_t count, cudaMemcpyKind kind) { return instance.MemcpyFromArray (dest, src, wOffset, hOffset, count, kind) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyFromArray(void* dest, cudaArray_t src, size_t wOffset, size_t hOffset, size_t count, cudaMemcpyKind kind) { return instance.MemcpyFromArray(new IntPtr(dest), src, wOffset, hOffset, count, kind); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t MemcpyFromArrayAsync (IntPtr dest, cudaArray_t src, size_t wOffset, size_t hOffset, size_t count, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyFromArrayAsync (dest, src, wOffset, hOffset, count, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyFromArrayAsync(void* dest, cudaArray_t src, size_t wOffset, size_t hOffset, size_t count, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyFromArrayAsync(new IntPtr(dest), src, wOffset, hOffset, count, kind, stream); }
         /// <summary>
         /// Copies data from the given symbol on the device
         /// </summary>
         public static cudaError_t MemcpyFromSymbol (IntPtr dest, string symbol, size_t count, size_t offset, cudaMemcpyKind kind) { return instance.MemcpyFromSymbol (dest, symbol, count, offset, kind) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyFromSymbol(void* dest, string symbol, size_t count, size_t offset, cudaMemcpyKind kind) { return instance.MemcpyFromSymbol(new IntPtr(dest), symbol, count, offset, kind); }
         /// <summary>
         /// Copies data from the given symbol on the device
         /// </summary>
         public static cudaError_t MemcpyFromSymbolAsync (IntPtr dest, string symbol, size_t count, size_t offset, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyFromSymbolAsync (dest, symbol, count, offset, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyFromSymbolAsync(void* dest, string symbol, size_t count, size_t offset, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyFromSymbolAsync(new IntPtr(dest), symbol, count, offset, kind, stream); }
         /// <summary>
         /// Copies memory between devices
         /// </summary>
         public static cudaError_t MemcpyPeer(IntPtr dest, int dstDevice, IntPtr src, int srcDevice, size_t count) { return instance.MemcpyPeer(dest, dstDevice, src, srcDevice, count); }
+        /// <summary>
+        /// Copies memory between devices
+        /// </summary>
         public static cudaError_t MemcpyPeer(void* dest, int dstDevice, IntPtr src, int srcDevice, size_t count) { return instance.MemcpyPeer(new IntPtr(dest), dstDevice, src, srcDevice, count); }
+        /// <summary>
+        /// Copies memory between devices
+        /// </summary>
         public static cudaError_t MemcpyPeer(IntPtr dest, int dstDevice, void* src, int srcDevice, size_t count) { return instance.MemcpyPeer(dest, dstDevice, new IntPtr(src), srcDevice, count); }
+        /// <summary>
+        /// Copies memory between devices
+        /// </summary>
         public static cudaError_t MemcpyPeer(void* dest, int dstDevice, void* src, int srcDevice, size_t count) { return instance.MemcpyPeer(new IntPtr(dest), dstDevice, new IntPtr(src), srcDevice, count); }
         /// <summary>
         /// Copies memory between devices
         /// </summary>
         public static cudaError_t MemcpyPeerAsync(IntPtr dest, int dstDevice, IntPtr src, int srcDevice, size_t count, cudaStream_t stream) { return instance.MemcpyPeerAsync(dest, dstDevice, src, srcDevice, count, stream); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyPeerAsync(void* dest, int dstDevice, IntPtr src, int srcDevice, size_t count, cudaStream_t stream) { return instance.MemcpyPeerAsync(new IntPtr(dest), dstDevice, src, srcDevice, count, stream); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyPeerAsync(IntPtr dest, int dstDevice, void* src, int srcDevice, size_t count, cudaStream_t stream) { return instance.MemcpyPeerAsync(dest, dstDevice, new IntPtr(src), srcDevice, count, stream); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyPeerAsync(void* dest, int dstDevice, void* src, int srcDevice, size_t count, cudaStream_t stream) { return instance.MemcpyPeerAsync(new IntPtr(dest), dstDevice, new IntPtr(src), srcDevice, count, stream); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t MemcpyToArray(cudaArray_t dest, size_t wOffset, size_t hOffset, IntPtr src, size_t count, cudaMemcpyKind kind) { return instance.MemcpyToArray(dest, wOffset, hOffset, src, count, kind); }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyToArray(cudaArray_t dest, size_t wOffset, size_t hOffset, void* src, size_t count, cudaMemcpyKind kind) { return instance.MemcpyToArray(dest, wOffset, hOffset, new IntPtr(src), count, kind); }
         /// <summary>
         /// Copies data between host and device
         /// </summary>
         public static cudaError_t MemcpyToArrayAsync (cudaArray_t dest, size_t wOffset, size_t hOffset, IntPtr src, size_t count, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyToArrayAsync (dest, wOffset, hOffset, src, count, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyToArrayAsync(cudaArray_t dest, size_t wOffset, size_t hOffset, void* src, size_t count, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyToArrayAsync(dest, wOffset, hOffset, new IntPtr(src), count, kind, stream); }
         /// <summary>
         /// Copies data to the given symbol on the device
         /// </summary>
         public static cudaError_t MemcpyToSymbol (string symbol, IntPtr src, size_t count, size_t offset, cudaMemcpyKind kind) { return instance.MemcpyToSymbol (symbol, src, count, offset, kind) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyToSymbol(string symbol, void* src, size_t count, size_t offset, cudaMemcpyKind kind) { return instance.MemcpyToSymbol(symbol, new IntPtr(src), count, offset, kind); }
         /// <summary>
         /// Copies data to the given symbol on the device
         /// </summary>
         public static cudaError_t MemcpyToSymbolAsync (string symbol, IntPtr src, size_t count, size_t offset, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyToSymbolAsync (symbol, src, count, offset, kind, stream) ; }
+        /// <summary>
+        /// Copies data between host and device
+        /// </summary>
         public static cudaError_t MemcpyToSymbolAsync(string symbol, void* src, size_t count, size_t offset, cudaMemcpyKind kind, cudaStream_t stream) { return instance.MemcpyToSymbolAsync(symbol, new IntPtr(src), count, offset, kind, stream); }
         /// <summary>
         /// Initializes or sets device memory to a value
         /// </summary>
         public static cudaError_t Memset (IntPtr devPtr, int value, size_t count) { return instance.Memset (devPtr, value, count) ; }
+        /// <summary>
+        /// Initializes or sets device memory to a value
+        /// </summary>
         public static cudaError_t Memset(void* devPtr, int value, size_t count) { return instance.Memset(new IntPtr(devPtr), value, count); }
         /// <summary>
         /// Initializes or sets device memory to a value
         /// </summary>
         public static cudaError_t Memset2D(IntPtr devPtr, size_t pitch, int value, size_t width, size_t height) { return instance.Memset2D(devPtr, pitch, value, width, height); }
+        /// <summary>
+        /// Initializes or sets device memory to a value
+        /// </summary>
         public static cudaError_t Memset2D(void* devPtr, size_t pitch, int value, size_t width, size_t height) { return instance.Memset2D(new IntPtr(devPtr), pitch, value, width, height); }
         /// <summary>
         /// Initializes or sets device memory to a value
         /// </summary>
         [IntrinsicFunction("cudaMemset2DAsync")]
         public static cudaError_t Memset2DAsync(IntPtr devPtr, size_t pitch, int value, size_t width, size_t height, cudaStream_t stream) { return instance.Memset2DAsync(devPtr, pitch, value, width, height, stream); }
+        /// <summary>
+        /// Initializes or sets device memory to a value
+        /// </summary>
         public static cudaError_t Memset2DAsync(void* devPtr, size_t pitch, int value, size_t width, size_t height, cudaStream_t stream) { return instance.Memset2DAsync(new IntPtr(devPtr), pitch, value, width, height, stream); }
         /// <summary>
         /// Initializes or sets device memory to a value
         /// </summary>
-        public static cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent) { return instance.Memset3D(devPtr, value, extent); }
+        public static cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent) { return instance.Memset3D(devPtr, value, extent); }
         /// <summary>
         /// Initializes or sets device memory to a value
         /// </summary>
         [IntrinsicFunction("cudaMemset3DAsync")]
-        public static cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent, cudaStream_t stream) { return instance.Memset3DAsync(devPtr, value, extent, stream); }
+        public static cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent, cudaStream_t stream) { return instance.Memset3DAsync(devPtr, value, extent, stream); }
         /// <summary>
         /// Initializes or sets device memory to a value
         /// </summary>
         [IntrinsicFunction("cudaMemsetAsync")]
         public static cudaError_t MemsetAsync(IntPtr devPtr, int value, size_t count, cudaStream_t stream) { return instance.MemsetAsync(devPtr, value, count, stream); }
+        /// <summary>
+        /// Initializes or sets device memory to a value
+        /// </summary>
+        /// 
+        [IntrinsicFunction("cudaMemsetAsync")]
         public static cudaError_t MemsetAsync(void* devPtr, int value, size_t count, cudaStream_t stream) { return instance.MemsetAsync(new IntPtr(devPtr), value, count, stream); }
 
 #endregion
@@ -1116,6 +1404,11 @@ namespace Hybridizer.Runtime.CUDAImports
             return _isCudaAvailable;
         }
 
+        /// <summary>
+        /// check and error
+        /// </summary>
+        /// <param name="err">error to check</param>
+        /// <param name="abort">abort process if any error</param>
         public static void ERROR_CHECK(cudaError_t err, bool abort = true)
         {
             if (err != cudaError_t.cudaSuccess)

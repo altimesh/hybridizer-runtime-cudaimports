@@ -11,10 +11,10 @@ namespace Hybridizer.Runtime.CUDAImports
     /// Full documentation <see href="https://docs.nvidia.com/cuda/curand/index.html">here</see>
     /// </summary>
     #pragma warning disable 1591
-    public partial class curand
+    internal partial class curandImplem
     {
 		[HybridizerIgnore("OMP,JAVA,CUDA")]
-		class ICurand32_80 : ICurand
+		internal class Curand32_80 : ICurand
         {
             public const string CURAND_DLL = "curand32_80.dll";
 
@@ -121,7 +121,7 @@ namespace Hybridizer.Runtime.CUDAImports
         }
 
         [HybridizerIgnore("OMP,JAVA,CUDA")]
-        class ICurand64_80 : ICurand
+        internal class Curand64_80 : ICurand
         {
             public const string CURAND_DLL = "curand64_80.dll";
 

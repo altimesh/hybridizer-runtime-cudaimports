@@ -1,6 +1,7 @@
 ﻿/* (c) ALTIMESH 2018 -- all rights reserved */
 using System;
 using System.Runtime.InteropServices;
+using static Hybridizer.Runtime.CUDAImports.cufftImplem;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
@@ -8,7 +9,7 @@ namespace Hybridizer.Runtime.CUDAImports
     /// cufft wrapper
     /// Complete documentation <see href="https://docs.nvidia.com/cuda/cufft/index.html">here</see>
     /// </summary>
-    public partial class cufft
+    internal partial class cufft
     {
         static ICUFFT instance = new CUFFT_64_75();
 
@@ -17,17 +18,9 @@ namespace Hybridizer.Runtime.CUDAImports
             string cudaVersion = cuda.GetCudaVersion();
             switch (cudaVersion)
             {
-                    /*
-                case "42":
-                    instance = (IntPtr.Size == 8) ? (ICUFFT)new CUFFT_64_42() : (ICUFFT)new CUFFT_32_42();
-                    break;*/
                 case "50":
                     instance = (IntPtr.Size == 8) ? (ICUFFT)new CUFFT_64_50() : (ICUFFT)new CUFFT_32_50();
                     break;
-                    /*
-                case "55":
-                    instance = (IntPtr.Size == 8) ? (ICUFFT)new CUFFT_64_55() : (ICUFFT)new CUFFT_32_55();
-                    break;*/
                 case "60":
                     instance = (IntPtr.Size == 8) ? (ICUFFT)new CUFFT_64_60() : (ICUFFT)new CUFFT_32_60();
                     break;
@@ -36,31 +29,35 @@ namespace Hybridizer.Runtime.CUDAImports
                     break;
                 case "75":
                     if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 7.5");
-                    instance = (ICUFFT)new CUFFT_64_75();
+                    instance = new CUFFT_64_75();
                     break;
                 case "80":
                     if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 8.0");
-                    instance = (ICUFFT)new CUFFT_64_80();
+                    instance = new CUFFT_64_80();
                     break;
                 case "90":
                     if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 9.0");
-                    instance = (ICUFFT)new CUFFT_64_90();
+                    instance = new CUFFT_64_90();
                     break;
                 case "91":
                     if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 9.1");
-                    instance = (ICUFFT)new CUFFT_64_91();
+                    instance = new CUFFT_64_91();
                     break;
                 case "92":
                     if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 9.2");
-                    instance = (ICUFFT)new CUFFT_64_92();
+                    instance = new CUFFT_64_92();
                     break;
                 case "100":
                     if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 10.0");
-                    instance = (ICUFFT)new CUFFT_64_100();
+                    instance = new CUFFT_64_100();
                     break;
                 case "101":
                     if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 10.1");
-                    instance = (ICUFFT)new CUFFT_64_101();
+                    instance = new CUFFT_64_101();
+                    break;
+                case "110":
+                    if (IntPtr.Size != 8) throw new ApplicationException("32bits version of CUFFT does not exist for CUDA 10.1");
+                    instance = new CUFFT_64_110();
                     break;
                 default:
                     throw new ApplicationException(string.Format("Unknown version of Cuda {0}", cudaVersion));
@@ -453,7 +450,7 @@ namespace Hybridizer.Runtime.CUDAImports
     
         /// <summary>
         /// Gives a more accurate estimate of the work area size required for a plan than the <see cref="Estimate1d"/> routine as they take into account any plan settings that may have been made.
-        /// As discussed in the section <see cref="https://docs.nvidia.com/cuda/archive/9.2/cufft/index.html#work-estimate">cuFFT Estimated Size of Work Area</see>, the workSize value(s) returned may be conservative especially for values of n that are not multiples of powers of 2, 3, 5 and 7.
+        /// As discussed in the section <see href="https://docs.nvidia.com/cuda/archive/9.2/cufft/index.html#work-estimate">cuFFT Estimated Size of Work Area</see>, the workSize value(s) returned may be conservative especially for values of n that are not multiples of powers of 2, 3, 5 and 7.
         /// </summary>
         /// <param name="handle">cufftHandle returned by cufftCreate</param>
         /// <param name="nx">The transform size (e.g. 256 for a 256-point FFT)</param>

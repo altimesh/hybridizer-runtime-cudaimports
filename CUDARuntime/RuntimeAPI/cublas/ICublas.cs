@@ -1,10 +1,9 @@
 ﻿/* (c) ALTIMESH 2018 -- all rights reserved */
 using System;
-using System.Runtime.InteropServices;
-using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+#pragma warning disable 1591
     public interface ICUBLAS
     {
         cublasStatus_t Create(out cublasHandle_t handle);
@@ -243,4 +242,6 @@ namespace Hybridizer.Runtime.CUDAImports
 
         #endregion
     }
+
+#pragma warning restore 1591
 }

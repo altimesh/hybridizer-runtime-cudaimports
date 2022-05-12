@@ -7,6 +7,9 @@ using System.Runtime.InteropServices;
 // ReSharper disable once CheckNamespace
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// jitted cuda module
+    /// </summary>
     public class JittedModule
     {
         private IntPtr _cubin;
@@ -15,13 +18,20 @@ namespace Hybridizer.Runtime.CUDAImports
 
         private CUmodule _module = new CUmodule(IntPtr.Zero);
 
-        // ReSharper disable once UnusedMember.Global
+        /// <summary>
+        /// module
+        /// </summary>
         public CUmodule Module
         {
             // ReSharper disable once ArrangeAccessorOwnerBody
             get { return _module; }
         } 
-
+        /// <summary>
+        /// load from cubin
+        /// </summary>
+        /// <param name="cubin"></param>
+        /// <param name="cubinSize"></param>
+        /// <returns></returns>
         public CUresult Load(IntPtr cubin, size_t cubinSize)
         {
             _cubin = cubin;
@@ -30,6 +40,12 @@ namespace Hybridizer.Runtime.CUDAImports
         }
 
         #region get kernel 
+        /// <summary>
+        /// get kernel from name
+        /// </summary>
+        /// <param name="kernelname"></param>
+        /// <param name="result"></param>
+        /// <returns></returns>
         public CUresult GetFunctionPointer(string kernelname, out IntPtr result)
         {
             IntPtr dFuncptrvar;
@@ -61,6 +77,11 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
 
+        /// <summary>
+        /// get entry point from name
+        /// </summary>
+        /// <param name="kernelname"></param>
+        /// <returns></returns>
         public CUfunction GetEntryPoint(string kernelname)
         {
             CUfunction dFuncptrvar;

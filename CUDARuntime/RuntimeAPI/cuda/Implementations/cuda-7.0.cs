@@ -897,11 +897,11 @@ namespace Hybridizer.Runtime.CUDAImports
             public static extern cudaError_t cudaMalloc(out IntPtr dev, size_t size);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3D")]
-            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaExtent extent);
+            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3DArray")]
             public static extern cudaError_t cudaMalloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
-                cudaExtent extent, cudaMallocArrayFlags flags);
+                cudaFuncAttributes extent, cudaMallocArrayFlags flags);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMallocArray")]
             public static extern cudaError_t cudaMallocArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
@@ -1005,7 +1005,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 size_t height);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMemset3D")]
-            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent);
+            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent);
 
             public cudaError_t Free(IntPtr dev)
             {
@@ -1062,12 +1062,12 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMalloc(out dev, size);
             }
 
-            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaExtent extent)
+            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent)
             {
                 return cudaMalloc3D(ref ptr, extent);
             }
 
-            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaExtent extent,
+            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaFuncAttributes extent,
                 cudaMallocArrayFlags flags)
             {
                 return cudaMalloc3DArray(out arr, ref chan, extent, flags);
@@ -1223,17 +1223,17 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMemset2D(devPtr, pitch, value, width, height);
             }
 
-            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent)
+            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent)
             {
                 return cudaMemset3D(devPtr, value, extent);
             }
 
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaArrayGetInfo")]
-            static extern cudaError_t cudaArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent,
+            static extern cudaError_t cudaArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent,
                 out uint flags, cudaArray_t array); // Gets info about the specified cudaArray. 
 
-            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent, out uint flags,
+            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent, out uint flags,
                 cudaArray_t array)
             {
                 return cudaArrayGetInfo(out desc, out extent, out flags, array);
@@ -1270,11 +1270,11 @@ namespace Hybridizer.Runtime.CUDAImports
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMallocMipmappedArray")]
             static extern cudaError_t cudaMallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, int numLevels,
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, int numLevels,
                 uint flags); // Allocate a mipmapped array on the device. 
 
             public cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, int numLevels, uint flags = 0)
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, int numLevels, uint flags = 0)
             {
                 return cudaMallocMipmappedArray(out mipmappedArray, ref desc, extent, numLevels, flags);
             }
@@ -1306,7 +1306,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 size_t height, cudaStream_t stream);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMemset3DAsync")]
-            public static extern cudaError_t cudaMemset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent,
+            public static extern cudaError_t cudaMemset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent,
                 cudaStream_t stream);
 
             public cudaError_t MemsetAsync(IntPtr devPtr, int value, size_t count,
@@ -1321,7 +1321,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMemset2DAsync(devPtr, pitch, value, width, height, stream);
             }
 
-            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent,
+            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent,
                 cudaStream_t stream = new cudaStream_t())
             {
                 return cudaMemset3DAsync(devPtr, value, extent, stream);
@@ -1417,7 +1417,7 @@ namespace Hybridizer.Runtime.CUDAImports
             }
 
             public cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, uint numLevels, uint flags)
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, uint numLevels, uint flags)
             {
                 throw new NotImplementedException();
             }
@@ -2070,11 +2070,11 @@ namespace Hybridizer.Runtime.CUDAImports
             public static extern cudaError_t cudaMalloc(out IntPtr dev, size_t size);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3D")]
-            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaExtent extent);
+            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3DArray")]
             public static extern cudaError_t cudaMalloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
-                cudaExtent extent, cudaMallocArrayFlags flags);
+                cudaFuncAttributes extent, cudaMallocArrayFlags flags);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMallocArray")]
             public static extern cudaError_t cudaMallocArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
@@ -2178,7 +2178,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 size_t height);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMemset3D")]
-            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent);
+            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent);
 
             public cudaError_t Free(IntPtr dev)
             {
@@ -2235,12 +2235,12 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMalloc(out dev, size);
             }
 
-            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaExtent extent)
+            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent)
             {
                 return cudaMalloc3D(ref ptr, extent);
             }
 
-            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaExtent extent,
+            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaFuncAttributes extent,
                 cudaMallocArrayFlags flags)
             {
                 return cudaMalloc3DArray(out arr, ref chan, extent, flags);
@@ -2396,17 +2396,17 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMemset2D(devPtr, pitch, value, width, height);
             }
 
-            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent)
+            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent)
             {
                 return cudaMemset3D(devPtr, value, extent);
             }
 
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaArrayGetInfo")]
-            static extern cudaError_t cudaArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent,
+            static extern cudaError_t cudaArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent,
                 out uint flags, cudaArray_t array); // Gets info about the specified cudaArray. 
 
-            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent, out uint flags,
+            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent, out uint flags,
                 cudaArray_t array)
             {
                 return cudaArrayGetInfo(out desc, out extent, out flags, array);
@@ -2443,11 +2443,11 @@ namespace Hybridizer.Runtime.CUDAImports
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMallocMipmappedArray")]
             static extern cudaError_t cudaMallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, int numLevels,
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, int numLevels,
                 uint flags); // Allocate a mipmapped array on the device. 
 
             public cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, int numLevels, uint flags = 0)
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, int numLevels, uint flags = 0)
             {
                 return cudaMallocMipmappedArray(out mipmappedArray, ref desc, extent, numLevels, flags);
             }
@@ -2479,7 +2479,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 size_t height, cudaStream_t stream);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMemset3DAsync")]
-            public static extern cudaError_t cudaMemset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent,
+            public static extern cudaError_t cudaMemset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent,
                 cudaStream_t stream);
 
             public cudaError_t MemsetAsync(IntPtr devPtr, int value, size_t count,
@@ -2494,7 +2494,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMemset2DAsync(devPtr, pitch, value, width, height, stream);
             }
 
-            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent,
+            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent,
                 cudaStream_t stream = new cudaStream_t())
             {
                 return cudaMemset3DAsync(devPtr, value, extent, stream);
@@ -2590,7 +2590,7 @@ namespace Hybridizer.Runtime.CUDAImports
             }
 
             public cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, uint numLevels, uint flags)
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, uint numLevels, uint flags)
             {
                 throw new NotImplementedException();
             }

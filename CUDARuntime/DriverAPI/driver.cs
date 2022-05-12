@@ -8,20 +8,21 @@ using System.Text;
 namespace Hybridizer.Runtime.CUDAImports
 {
 
+    /// <summary>
+    /// driver API
+    /// </summary>
     public class driver
     {
         const string dllPath = "nvcuda.dll";
 
+        
         [DllImport(dllPath, CharSet = CharSet.Ansi)] static extern CUresult cuCtxGetCurrent(out CUcontext ctx);
-
         /// <summary>
         /// Returns the CUDA context bound to the calling CPU thread.
         /// Returns in \p* pctx the CUDA context bound to the calling CPU thread.
         /// If no context is bound to the calling CPU thread then \p* pctx is
-        /// set to NULL and <see cref="CUresult.CUDA_SUCCESS"> is returned.
+        /// set to NULL and <see cref="CUresult.CUDA_SUCCESS" /> is returned.
         /// </summary>
-        /// <param name="ctx">Returned context handle</param>
-        /// <returns><see cref="CUresult.CUDA_SUCCESS">, <see cref="CUresult.CUDA_ERROR_NOT_INITIALIZED"><see cref="CUresult.CUDA_ERROR_DEINITIALIZED"></returns>
         public static CUresult GetContext(out CUcontext ctx) { return cuCtxGetCurrent(out ctx); }
 
 
@@ -63,6 +64,15 @@ namespace Hybridizer.Runtime.CUDAImports
             return cuModuleLoadDataEx(out module, image, numOptions, options, optionValues);
         }
 
+        /// <summary>
+        /// generates cubin from ptx
+        /// </summary>
+        /// <param name="ptx"></param>
+        /// <param name="cubin"></param>
+        /// <param name="cubinSize"></param>
+        /// <param name="info_log"></param>
+        /// <param name="error_log"></param>
+        /// <returns></returns>
         public static CUresult GenerateCubin(string[] ptx, out IntPtr cubin, out size_t cubinSize, out string info_log, out string error_log)
         {
             List<GCHandle> arrayHandles = new List<GCHandle>();
@@ -182,11 +192,6 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <summary>
         /// Returns a global pointer from a module.
         /// </summary>
-        /// <param name="devptr">Returned global device pointer</param>
-        /// <param name="size">Returned global size in bytes</param>
-        /// <param name="module">Module to retrieve global from</param>
-        /// <param name="symbol">Name of global to retrieve</param>
-        /// <returns></returns>
         public static CUresult ModuleGetFunction(out CUfunction func, CUmodule module, string symbol)
         {
             return cuModuleGetFunction(out func, module, symbol);
@@ -438,11 +443,6 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="devPtr"></param>
-        /// <param name="val"></param>
-        /// <param name="sizeInBytes"></param>
-        /// <param name="stream"></param>
-        /// <returns></returns>
         public static CUresult MemsetD8Async(IntPtr devPtr, byte val, size_t numElements, CUstream stream)
         {
             return cuMemsetD8Async(devPtr, val, numElements, stream);
@@ -536,8 +536,6 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <summary>
         /// create event
         /// </summary>
-        /// <param name="evt"></param>
-        /// <returns></returns>
         public static CUresult EventCreate(out CUevent evt, CUevent_flags flags = CUevent_flags.CU_EVENT_DEFAULT)
         {
             return cuEventCreate(out evt, flags);
@@ -575,8 +573,6 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <summary>
         /// sync event
         /// </summary>
-        /// <param name="evt"></param>
-        /// <returns></returns>
         public static CUresult EventRecord(CUevent evt, CUstream stream)
         {
             return cuEventRecord(evt, stream);

@@ -548,11 +548,24 @@ namespace Hybridizer.Runtime.CUDAImports
         }
     }
 
+    /// <summary>
+    /// rename intrinsic function -- allows dotnet property to be named differently from native version
+    /// </summary>
     [Guid("F796E790-522B-4ECE-A25F-07BF145A938A")]
     public class IntrinsicRenameAttribute : IntrinsicAttribute
     {
+        /// <summary>
+        /// is function ? 
+        /// </summary>
         public override bool IsFunction { get { return false; } set { } }
+        /// <summary>
+        /// default constructor
+        /// </summary>
         public IntrinsicRenameAttribute() : base() { }
+        /// <summary>
+        /// constructor from name
+        /// </summary>
+        /// <param name="name">native name</param>
         public IntrinsicRenameAttribute(string name) : base(name) { }
     }
 

@@ -8,6 +8,9 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// marshalling for array of strinfgs
+    /// </summary>
     public class StringArrayMarshal : IDisposable
     {
         IntPtr[] ar;
@@ -15,11 +18,18 @@ namespace Hybridizer.Runtime.CUDAImports
         byte[][] charArrays;
         GCHandle[] handles;
 
+        /// <summary>
+        /// get intptr
+        /// </summary>
         public IntPtr Ptr
         {
             get { if (ar == null) return IntPtr.Zero; else return Marshal.UnsafeAddrOfPinnedArrayElement(ar, 0); }
         }
 
+        /// <summary>
+        /// constructor
+        /// </summary>
+        /// <param name="data"></param>
         public StringArrayMarshal(string[] data)
         {
             if (data == null)
@@ -49,6 +59,10 @@ namespace Hybridizer.Runtime.CUDAImports
 
         private bool disposedValue = false;
 
+        /// <summary>
+        /// dispose
+        /// </summary>
+        /// <param name="disposing"></param>
         protected virtual void Dispose(bool disposing)
         {
             if (!disposedValue)
@@ -67,10 +81,16 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
 
+        /// <summary>
+        /// destructor
+        /// </summary>
         ~StringArrayMarshal() {
           Dispose(false);
         }
 
+        /// <summary>
+        /// dispose
+        /// </summary>
         public void Dispose()
         {
             Dispose(true);

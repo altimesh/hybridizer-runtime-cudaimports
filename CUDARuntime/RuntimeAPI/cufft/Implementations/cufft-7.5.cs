@@ -8,9 +8,9 @@ namespace Hybridizer.Runtime.CUDAImports
     /// cufft wrapper
     /// Complete documentation <see href="https://docs.nvidia.com/cuda/cufft/index.html">here</see>
     /// </summary>
-    public partial class cufft
+    internal partial class cufftImplem
     {
-        private class CUFFT_64_75 : ICUFFT
+        internal class CUFFT_64_75 : ICUFFT
         {
             public const string CUFFT_DLL = "cufft64_75.dll";
 

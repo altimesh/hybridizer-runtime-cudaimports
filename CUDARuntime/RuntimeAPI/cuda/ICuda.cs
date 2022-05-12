@@ -284,11 +284,11 @@ namespace Hybridizer.Runtime.CUDAImports
 		/// <summary>
 		/// Allocates logical 1D, 2D, or 3D memory objects on the device
 		/// </summary>
-		cudaError_t Malloc3D (ref cudaPitchedPtr ptr, cudaExtent extent) ;
+		cudaError_t Malloc3D (ref cudaPitchedPtr ptr, cudaFuncAttributes extent) ;
 		/// <summary>
 		/// Allocate an array on the device
 		/// </summary>
-		cudaError_t Malloc3DArray (out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaExtent extent, cudaMallocArrayFlags flags) ;
+		cudaError_t Malloc3DArray (out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaFuncAttributes extent, cudaMallocArrayFlags flags) ;
 		/// <summary>
 		/// Allocate an array on the device
 		/// </summary>
@@ -388,11 +388,11 @@ namespace Hybridizer.Runtime.CUDAImports
 		/// <summary>
 		/// Initializes or sets device memory to a value
 		/// </summary>
-		cudaError_t Memset3D (cudaPitchedPtr devPtr, int value, cudaExtent extent) ;
+		cudaError_t Memset3D (cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent) ;
 		/// <summary>
 		/// Gets info about the specified cudaArray
 		/// </summary>
-		cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent, out uint flags, cudaArray_t array);
+		cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent, out uint flags, cudaArray_t array);
 		/// <summary>
 		/// Frees a mipmapped array on the device
 		/// </summary>
@@ -408,7 +408,7 @@ namespace Hybridizer.Runtime.CUDAImports
 		/// <summary>
 		/// Allocate a mipmapped array on the device
 		/// </summary>
-		cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray, ref cudaChannelFormatDesc desc, cudaExtent extent, uint numLevels, uint flags);
+		cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray, ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, uint numLevels, uint flags);
 		/// <summary>
 		/// Advise about the usage of a given memory range
 		/// </summary>
@@ -444,7 +444,7 @@ namespace Hybridizer.Runtime.CUDAImports
 		/// <summary>
 		/// Copies memory between devices
 		/// </summary>
-		cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent, cudaStream_t stream);
+		cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent, cudaStream_t stream);
 		/// <summary>
 		/// Copies memory between devices
 		/// </summary>

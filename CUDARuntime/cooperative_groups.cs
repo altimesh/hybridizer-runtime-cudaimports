@@ -302,6 +302,10 @@ namespace Hybridizer.Runtime.CUDAImports
         /// </summary>
         public dim3 group_dim() { return new dim3(1, 0, 0); }
 
+        /// <summary>
+        /// creates a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(thread_block tb) { return new thread_group(); }
     }
@@ -418,10 +422,17 @@ namespace Hybridizer.Runtime.CUDAImports
         public int ballot(int predicate) { return predicate; }
 
         // TODO: match_all, match_any
+        /// <summary>
+        /// creates a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(coalesced_group tb) { return new thread_group(); }
     }
 
+    /// <summary>
+    /// dotnet representation of cooperative_groups::grid_group
+    /// </summary>
     [IntrinsicType("cooperative_groups::grid_group")]
     [SingleStaticAssignment]
     public struct grid_group
@@ -438,19 +449,37 @@ namespace Hybridizer.Runtime.CUDAImports
         /// Get the size (total number of threads) of a group
         /// </summary>
         public uint size() { return 1; }
+        /// <summary>
+        /// is valid ?
+        /// </summary>
+        /// <returns></returns>
         public bool is_valid() { return true; }
+        /// <summary>
+        /// returns group dimension
+        /// </summary>
+        /// <returns></returns>
         public dim3 group_dim() { return new dim3(1, 0, 0); }
 
+        /// <summary>
+        /// creates a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(grid_group tb) { return new thread_group(); }
     }
 
     // TODO: multi_grid_group
-
+    /// <summary>
+    /// a thread block tile of 32 threads
+    /// </summary>
     [IntrinsicType("cooperative_groups::thread_block_tile<32>")]
     [SingleStaticAssignment]
     public struct thread_block_tile_32
     {
+        /// <summary>
+        /// creates a thread group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(thread_block_tile_32 tb) { return new thread_group(); }
         /// <summary>
@@ -581,10 +610,17 @@ namespace Hybridizer.Runtime.CUDAImports
         public double shfl_xor(double v, uint laneMask) { return v; }
     }
     
+    /// <summary>
+    /// a thread block tile of 16 threads
+    /// </summary>
     [IntrinsicType("cooperative_groups::thread_block_tile<16>")]
     [SingleStaticAssignment]
     public struct thread_block_tile_16
     {
+        /// <summary>
+        /// converts to a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(thread_block_tile_16 tb) { return new thread_group(); }
         /// <summary>
@@ -715,10 +751,17 @@ namespace Hybridizer.Runtime.CUDAImports
         public double shfl_xor(double v, uint laneMask) { return v; }
     }
 
+    /// <summary>
+    /// a thread block tile of 8 threads
+    /// </summary>
     [IntrinsicType("cooperative_groups::thread_block_tile<8>")]
     [SingleStaticAssignment]
     public struct thread_block_tile_8
     {
+        /// <summary>
+        /// converts to a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(thread_block_tile_8 tb) { return new thread_group(); }
         /// <summary>
@@ -849,10 +892,17 @@ namespace Hybridizer.Runtime.CUDAImports
         public double shfl_xor(double v, uint laneMask) { return v; }
     }
 
+    /// <summary>
+    /// a thread block tile of 4 threads
+    /// </summary>
     [IntrinsicType("cooperative_groups::thread_block_tile<4>")]
     [SingleStaticAssignment]
     public struct thread_block_tile_4
     {
+        /// <summary>
+        /// converts to a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(thread_block_tile_4 tb) { return new thread_group(); }
         /// <summary>
@@ -983,10 +1033,17 @@ namespace Hybridizer.Runtime.CUDAImports
         public double shfl_xor(double v, uint laneMask) { return v; }
     }
 
+    /// <summary>
+    /// a thread block tile of 2 threads
+    /// </summary>
     [IntrinsicType("cooperative_groups::thread_block_tile<2>")]
     [SingleStaticAssignment]
     public struct thread_block_tile_2
     {
+        /// <summary>
+        /// converts to a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(thread_block_tile_2 tb) { return new thread_group(); }
         /// <summary>
@@ -1117,10 +1174,17 @@ namespace Hybridizer.Runtime.CUDAImports
         public double shfl_xor(double v, uint laneMask) { return v; }
     }
 
+    /// <summary>
+    /// a thread block tile of 1 thread
+    /// </summary>
     [IntrinsicType("cooperative_groups::thread_block_tile<1>")]
     [SingleStaticAssignment]
     public struct thread_block_tile_1
     {
+        /// <summary>
+        /// converts to a thread_group
+        /// </summary>
+        /// <param name="tb"></param>
         [IntrinsicFunction("")]
         public static implicit operator thread_group(thread_block_tile_1 tb) { return new thread_group(); }
         /// <summary>

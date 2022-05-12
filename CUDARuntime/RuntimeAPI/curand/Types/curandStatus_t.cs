@@ -6,6 +6,9 @@ using size_t = System.UIntPtr ;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+	/// <summary>
+	/// curand status
+	/// </summary>
 	[IntrinsicType("curandStatus_t")]
 	public enum curandStatus_t : int
 	{

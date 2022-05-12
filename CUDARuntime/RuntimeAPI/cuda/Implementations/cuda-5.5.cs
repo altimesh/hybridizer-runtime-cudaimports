@@ -717,11 +717,11 @@ namespace Hybridizer.Runtime.CUDAImports
             public static extern cudaError_t cudaMalloc(out IntPtr dev, size_t size);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3D")]
-            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaExtent extent);
+            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3DArray")]
             public static extern cudaError_t cudaMalloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
-                cudaExtent extent, cudaMallocArrayFlags flags);
+                cudaFuncAttributes extent, cudaMallocArrayFlags flags);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMallocArray")]
             public static extern cudaError_t cudaMallocArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
@@ -825,7 +825,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 size_t height);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMemset3D")]
-            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent);
+            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent);
 
             public cudaError_t Free(IntPtr dev)
             {
@@ -882,12 +882,12 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMalloc(out dev, size);
             }
 
-            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaExtent extent)
+            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent)
             {
                 return cudaMalloc3D(ref ptr, extent);
             }
 
-            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaExtent extent,
+            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaFuncAttributes extent,
                 cudaMallocArrayFlags flags)
             {
                 return cudaMalloc3DArray(out arr, ref chan, extent, flags);
@@ -1043,7 +1043,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMemset2D(devPtr, pitch, value, width, height);
             }
 
-            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent)
+            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent)
             {
                 return cudaMemset3D(devPtr, value, extent);
             }
@@ -1166,7 +1166,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 throw new NotImplementedException();
             }
 
-            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent, out uint flags,
+            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent, out uint flags,
                 cudaArray_t array)
             {
                 throw new NotImplementedException();
@@ -1189,7 +1189,7 @@ namespace Hybridizer.Runtime.CUDAImports
             }
 
             public cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, uint numLevels, uint flags)
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, uint numLevels, uint flags)
             {
                 throw new NotImplementedException();
             }
@@ -1236,7 +1236,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 throw new NotImplementedException();
             }
 
-            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent, cudaStream_t stream)
+            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent, cudaStream_t stream)
             {
                 throw new NotImplementedException();
             }
@@ -1790,11 +1790,11 @@ namespace Hybridizer.Runtime.CUDAImports
             public static extern cudaError_t cudaMalloc(out IntPtr dev, size_t size);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3D")]
-            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaExtent extent);
+            public static extern cudaError_t cudaMalloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMalloc3DArray")]
             public static extern cudaError_t cudaMalloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
-                cudaExtent extent, cudaMallocArrayFlags flags);
+                cudaFuncAttributes extent, cudaMallocArrayFlags flags);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMallocArray")]
             public static extern cudaError_t cudaMallocArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan,
@@ -1898,7 +1898,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 size_t height);
 
             [DllImport(CUDARTDLL, CharSet = CharSet.Ansi, EntryPoint = "cudaMemset3D")]
-            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent);
+            public static extern cudaError_t cudaMemset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent);
 
             public cudaError_t Free(IntPtr dev)
             {
@@ -1955,12 +1955,12 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMalloc(out dev, size);
             }
 
-            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaExtent extent)
+            public cudaError_t Malloc3D(ref cudaPitchedPtr ptr, cudaFuncAttributes extent)
             {
                 return cudaMalloc3D(ref ptr, extent);
             }
 
-            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaExtent extent,
+            public cudaError_t Malloc3DArray(out cudaArray_t arr, ref cudaChannelFormatDesc chan, cudaFuncAttributes extent,
                 cudaMallocArrayFlags flags)
             {
                 return cudaMalloc3DArray(out arr, ref chan, extent, flags);
@@ -2116,7 +2116,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 return cudaMemset2D(devPtr, pitch, value, width, height);
             }
 
-            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaExtent extent)
+            public cudaError_t Memset3D(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent)
             {
                 return cudaMemset3D(devPtr, value, extent);
             }
@@ -2239,7 +2239,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 throw new NotImplementedException();
             }
 
-            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaExtent extent, out uint flags,
+            public cudaError_t ArrayGetInfo(out cudaChannelFormatDesc desc, out cudaFuncAttributes extent, out uint flags,
                 cudaArray_t array)
             {
                 throw new NotImplementedException();
@@ -2262,7 +2262,7 @@ namespace Hybridizer.Runtime.CUDAImports
             }
 
             public cudaError_t MallocMipmappedArray(out cudaMipmappedArray_t mipmappedArray,
-                ref cudaChannelFormatDesc desc, cudaExtent extent, uint numLevels, uint flags)
+                ref cudaChannelFormatDesc desc, cudaFuncAttributes extent, uint numLevels, uint flags)
             {
                 throw new NotImplementedException();
             }
@@ -2309,7 +2309,7 @@ namespace Hybridizer.Runtime.CUDAImports
                 throw new NotImplementedException();
             }
 
-            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaExtent extent, cudaStream_t stream)
+            public cudaError_t Memset3DAsync(cudaPitchedPtr devPtr, int value, cudaFuncAttributes extent, cudaStream_t stream)
             {
                 throw new NotImplementedException();
             }

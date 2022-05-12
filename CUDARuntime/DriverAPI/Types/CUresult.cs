@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// result of driver api call
+    /// </summary>
     public enum CUresult
     {
         /// <summary>

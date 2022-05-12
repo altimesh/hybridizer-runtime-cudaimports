@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// cujit options
+    /// </summary>
     public enum CUjit_option
     {
         /// <summary>
@@ -140,6 +143,9 @@ namespace Hybridizer.Runtime.CUDAImports
         /// The below jit options are used for internal purposes only, in this version of CUDA
         /// </summary>
         CU_JIT_NEW_SM3X_OPT,
+        /// <summary>
+        /// fast compile
+        /// </summary>
         CU_JIT_FAST_COMPILE,
 
         /// <summary>

@@ -8,8 +8,15 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// nvrtc
+    /// </summary>
     public static class nvrtc
     {
+        /// <summary>
+        /// get cuda version
+        /// </summary>
+        /// <returns></returns>
         public static string GetCudaVersion()
         {
             // If not, get the version configured in app.config
@@ -40,36 +47,84 @@ namespace Hybridizer.Runtime.CUDAImports
             }
         }
 
+        /// <summary>
+        /// destroy program
+        /// </summary>
+        /// <param name="prog"></param>
+        /// <returns></returns>
         public static nvrtcResult DestroyProgram(ref nvrtcProgram prog)
         {
             return instance.DestroyProgram(ref prog);
         }
 
+        /// <summary>
+        /// create program
+        /// </summary>
+        /// <param name="prog"></param>
+        /// <param name="cudaSource"></param>
+        /// <param name="cudaSourceName"></param>
+        /// <param name="headers"></param>
+        /// <param name="headerNames"></param>
+        /// <returns></returns>
         public static nvrtcResult CreateProgram(out nvrtcProgram prog, string cudaSource, string cudaSourceName, string[] headers, string[] headerNames)
         {
             return instance.CreateProgram(out prog, cudaSource, cudaSourceName, headers, headerNames);
         }
 
+        /// <summary>
+        /// compile program
+        /// </summary>
+        /// <param name="prog"></param>
+        /// <param name="options"></param>
+        /// <returns></returns>
         public static nvrtcResult CompileProgram(nvrtcProgram prog, string[] options)
         {
             return instance.CompileProgram(prog, options);
         }
 
+        /// <summary>
+        /// get logs
+        /// </summary>
+        /// <param name="prog"></param>
+        /// <param name="log"></param>
+        /// <returns></returns>
         public static nvrtcResult GetProgramLog(nvrtcProgram prog, out string log)
         {
             return instance.GetProgramLog(prog, out log);
         }
 
+        /// <summary>
+        /// get ptx
+        /// </summary>
+        /// <param name="prog"></param>
+        /// <param name="ptx"></param>
+        /// <returns></returns>
         public static nvrtcResult GetPTX(nvrtcProgram prog, out string ptx)
         {
             return instance.GetPTX(prog, out ptx);
         }
 
+        /// <summary>
+        /// get version
+        /// </summary>
+        /// <param name="major"></param>
+        /// <param name="minor"></param>
+        /// <returns></returns>
         public static nvrtcResult Version(out int major, out int minor)
         {
             return instance.Version(out major, out minor);
         }
 
+        /// <summary>
+        /// generate ptx from cuda
+        /// </summary>
+        /// <param name="cuda"></param>
+        /// <param name="options"></param>
+        /// <param name="ptx"></param>
+        /// <param name="log"></param>
+        /// <param name="headerNames"></param>
+        /// <param name="headerContents"></param>
+        /// <returns></returns>
         public static nvrtcResult GeneratePTX(string cuda, string[] options, out string ptx, out string log, string[] headerNames = null, string[] headerContents = null)
         {
             // TODO: compile

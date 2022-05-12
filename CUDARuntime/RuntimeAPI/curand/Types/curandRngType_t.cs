@@ -6,9 +6,15 @@ using size_t = System.UIntPtr ;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+	/// <summary>
+	/// types of curand rng algo
+	/// </summary>
 	[IntrinsicType("curandRngType_t")]
 	public enum curandRngType_t : int
 	{
+		/// <summary>
+		/// test -- unused
+		/// </summary>
 		CURAND_RNG_TEST = 0,
 		/// <summary>
 		/// Default pseudorandom generator

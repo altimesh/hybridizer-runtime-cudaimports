@@ -6,9 +6,14 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+#pragma warning disable 1591
+	/// <summary>
+	///  math functions
+	/// </summary>
 	[IntrinsicInclude("hybridizer.math.cuh", Flavor = (int) HybridizerFlavor.CUDA)]
 	public class HybMath
 	{
+		
 		[IntrinsicFunction("hybridizer::exp"), HybridNakedFunction]
 		public static double Exp(double x)
 		{
@@ -191,4 +196,6 @@ namespace Hybridizer.Runtime.CUDAImports
 			}
 		}
 	}
+
+#pragma warning restore 1591
 }

@@ -6,9 +6,13 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// npp stream context
+    /// </summary>
     [StructLayout(LayoutKind.Sequential)]
     public struct NppStreamContext
     {
+#pragma warning disable 1591
         public cudaStream_t hStream;
         public int nCudaDeviceId;
         public int nMultiProcessorCount;
@@ -19,5 +23,6 @@ namespace Hybridizer.Runtime.CUDAImports
         public int nCudaDevAttrComputeCapabilityMinor;
         int nReserved0;
         int nReserved1;
-    }  
+#pragma warning restore 1591
+    }
 }

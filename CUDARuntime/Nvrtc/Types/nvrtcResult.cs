@@ -13,6 +13,7 @@ namespace Hybridizer.Runtime.CUDAImports
     /// </summary>
     public enum nvrtcResult
     {
+#pragma warning disable 1591
         NVRTC_SUCCESS = 0,
         NVRTC_ERROR_OUT_OF_MEMORY = 1,
         NVRTC_ERROR_PROGRAM_CREATION_FAILURE = 2,
@@ -25,5 +26,6 @@ namespace Hybridizer.Runtime.CUDAImports
         NVRTC_ERROR_NO_LOWERED_NAMES_BEFORE_COMPILATION = 9,
         NVRTC_ERROR_NAME_EXPRESSION_NOT_VALID = 10,
         NVRTC_ERROR_INTERNAL_ERROR = 11,
+#pragma warning restore 1591
     }
 }

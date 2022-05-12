@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Hybridizer.Runtime.CUDAImports
 {
+    /// <summary>
+    /// cujit input type
+    /// </summary>
     public enum CUjitInputType
     {
         /// <summary>

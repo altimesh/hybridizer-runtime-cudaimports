@@ -15,13 +15,6 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <summary>
         /// https://docs.nvidia.com/cuda/nvrtc/index.html#group__compilation_1g9ae65f68911d1cf0adda2af4ad8cb458
         /// </summary>
-        /// <param name="prog">CUDA Runtime Compilation program. </param>
-        /// <param name="src">CUDA program source. </param>
-        /// <param name="name"></param>
-        /// <param name="numHeaders"></param>
-        /// <param name="headers"></param>
-        /// <param name="includeNames"></param>
-        /// <returns></returns>
         [DllImport(DLL_NAME, CallingConvention = CallingConvention.Cdecl)]
         private static extern nvrtcResult nvrtcCreateProgram(out nvrtcProgram prog,
             [MarshalAs(UnmanagedType.LPStr)] string cudaSource,
