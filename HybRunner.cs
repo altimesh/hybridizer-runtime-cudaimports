@@ -169,6 +169,8 @@ namespace Hybridizer.Runtime.CUDAImports
                 throw new ApplicationException("Cannot load dll " + dllName);
             IntPtr procAddress = KernelInteropTools.GetProcAddress(_dllPtr, NativePtrConverter.NativeFunctionHybridizerGetProperties);
 
+            if (procAddress == IntPtr.Zero)
+                throw new ApplicationException("missing properties method " + dllName);
             HybridizerGetProperties d =
                 (HybridizerGetProperties)
                     Marshal.GetDelegateForFunctionPointer(procAddress, typeof(HybridizerGetProperties));

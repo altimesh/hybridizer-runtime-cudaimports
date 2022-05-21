@@ -19,6 +19,47 @@ namespace Hybridizer.Runtime.CUDAImports
         private static SafeDictionary<Type, FieldDeclaration[]> _orderedFieldsCache = new SafeDictionary<Type, FieldDeclaration[]>();
         private static SafeDictionary<Type, int> _sizeCache = new SafeDictionary<Type, int>();
 
+
+        private static Type[] funcTypes = new Type[]
+        {
+            typeof(Func<>),
+            typeof(Func<,>),
+            typeof(Func<,,>),
+            typeof(Func<,,,>),
+            typeof(Func<,,,,>),
+            typeof(Func<,,,,,>),
+            typeof(Func<,,,,,,>),
+            typeof(Func<,,,,,,,>),
+            typeof(Func<,,,,,,,,>),
+            typeof(Func<,,,,,,,,,>),
+            typeof(Func<,,,,,,,,,,>),
+            typeof(Func<,,,,,,,,,,,>),
+            typeof(Func<,,,,,,,,,,,,>),
+            typeof(Func<,,,,,,,,,,,,,>),
+            typeof(Func<,,,,,,,,,,,,,,>),
+            typeof(Func<,,,,,,,,,,,,,,,>),
+        };
+
+        private static Type[] actionTypes = new Type[]
+        {
+            typeof(Action<>),
+            typeof(Action<,>),
+            typeof(Action<,,>),
+            typeof(Action<,,,>),
+            typeof(Action<,,,,>),
+            typeof(Action<,,,,,>),
+            typeof(Action<,,,,,,>),
+            typeof(Action<,,,,,,,>),
+            typeof(Action<,,,,,,,,>),
+            typeof(Action<,,,,,,,,,>),
+            typeof(Action<,,,,,,,,,,>),
+            typeof(Action<,,,,,,,,,,,>),
+            typeof(Action<,,,,,,,,,,,,>),
+            typeof(Action<,,,,,,,,,,,,,>),
+            typeof(Action<,,,,,,,,,,,,,,>),
+            typeof(Action<,,,,,,,,,,,,,,,>),
+        };
+
         static FieldTools()
         {
             _typeToEnum.Add(typeof(bool), FieldTypeEnum.BOOL);
@@ -732,17 +773,9 @@ namespace Hybridizer.Runtime.CUDAImports
 
             if (GetCustomAttribute<CompilerGeneratedAttribute>(t) != null)
                 return true;
-            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Action<>))
+            if (t.IsGenericType && actionTypes.Contains(t.GetGenericTypeDefinition()))
                 return true;
-            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Action<,>))
-                return true;
-            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Action<,,>))
-                return true;
-            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Func<,,,>))
-                return true;
-            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Func<,,>))
-                return true;
-            if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(Func<,>))
+            if (t.IsGenericType && funcTypes.Contains(t.GetGenericTypeDefinition()))
                 return true;
             if (typeof(Delegate).IsAssignableFrom(t))
                 return true;
