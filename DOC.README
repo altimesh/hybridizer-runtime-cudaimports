@@ -1,5 +1,0 @@
-to generate documentation run
-docfx docfx.json -t W:\VsSolutions\Transcoder\Hybridizer\Runtime\Hybridizer.Runtime.CUDAImports\templates\altimesh --serve
-
-
-https://dotnet.github.io/docfx/index.html

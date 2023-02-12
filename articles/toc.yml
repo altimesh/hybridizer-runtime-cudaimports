@@ -1,6 +1,0 @@
-- name: Introduction
-  href: Introduction.md
-- name: CUDA Basic Concepts
-  href: CUDABasicConcepts.md
-- name: Programming Guide
-  href: ProgrammingGuide.md
