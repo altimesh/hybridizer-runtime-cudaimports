@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hybridizer.Runtime.CUDAImports", "Hybridizer.Runtime.CUDAImports.csproj", "{5A67D03A-32B1-453C-962A-74C578BC02F1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hybridizer.Runtime.CUDAImports", "Hybridizer.Runtime.CUDAImports.csproj", "{5A67D03A-32B1-453C-962A-74C578BC02F1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,18 +41,18 @@ Global
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicCPU|Any CPU.Build.0 = Release_BasicCPU|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicCPU|x64.ActiveCfg = Release_BasicCPU|x64
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicCPU|x64.Build.0 = Release_BasicCPU|x64
-		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|Any CPU.ActiveCfg = Release_BasicVersion|Any CPU
-		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|Any CPU.Build.0 = Release_BasicVersion|Any CPU
-		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|x64.ActiveCfg = Release_BasicVersion|x64
-		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|x64.Build.0 = Release_BasicVersion|x64
+		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|Any CPU.Build.0 = Debug|Any CPU
+		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|x64.ActiveCfg = Debug|Any CPU
+		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_BasicVersion|x64.Build.0 = Debug|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_NoHybrid|Any CPU.ActiveCfg = Release_NoHybrid|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_NoHybrid|Any CPU.Build.0 = Release_NoHybrid|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_NoHybrid|x64.ActiveCfg = Release_NoHybrid|x64
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release_NoHybrid|x64.Build.0 = Release_NoHybrid|x64
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release|x64.ActiveCfg = Release|x64
-		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release|x64.Build.0 = Release|x64
+		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release|x64.ActiveCfg = Release|Any CPU
+		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Release|x64.Build.0 = Release|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Sources|Any CPU.ActiveCfg = Sources|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Sources|Any CPU.Build.0 = Sources|Any CPU
 		{5A67D03A-32B1-453C-962A-74C578BC02F1}.Sources|x64.ActiveCfg = Sources|x64
