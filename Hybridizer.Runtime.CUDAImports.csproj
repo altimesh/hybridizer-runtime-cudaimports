@@ -1,0 +1,561 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5A67D03A-32B1-453C-962A-74C578BC02F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Hybridizer.Runtime.CUDAImports</RootNamespace>
+    <AssemblyName>Hybridizer.Runtime.CUDAImports</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <MonoDefines Condition="'$(OS)' == 'Unix'">MONO</MonoDefines>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\AnyCPU\Debug\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\AnyCPU\Release\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;DEBUG;PLATFORM_X86</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <DocumentationFile>bin\x86\Debug\Hybridizer.Runtime.CUDAImports.XML</DocumentationFile>
+    <WarningLevel>0</WarningLevel>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;PLATFORM_X86</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;PLATFORM_X64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>0</WarningLevel>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;PLATFORM_X64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <WarningLevel>0</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Sources|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Sources\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <CodeAnalysisFailOnMissingRules>false</CodeAnalysisFailOnMissingRules>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Sources|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Sources\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;DEBUG;PLATFORM_X86</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\x86\Debug\Hybridizer.Runtime.CUDAImports.XML</DocumentationFile>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Sources|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Sources\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;DEBUG;PLATFORM_X64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_NoHybrid|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug_NoHybrid\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);DEBUG;TRACE</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>false</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_NoHybrid|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug_NoHybrid\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;DEBUG;PLATFORM_X86</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\x86\Debug\Hybridizer.Runtime.CUDAImports.XML</DocumentationFile>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug_NoHybrid|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug_NoHybrid\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;DEBUG;PLATFORM_X64</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisIgnoreBuiltInRuleSets>true</CodeAnalysisIgnoreBuiltInRuleSets>
+    <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
+    <Optimize>false</Optimize>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_NoHybrid|AnyCPU'">
+    <OutputPath>bin\Release_NoHybrid\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_NoHybrid|x86'">
+    <OutputPath>bin\x86\Release_NoHybrid\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;PLATFORM_X86;$(MonoDefines)</DefineConstants>
+    <PlatformTarget>x86</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>full</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_NoHybrid|x64'">
+    <OutputPath>bin\x64\Release_NoHybrid\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <PlatformTarget>x64</PlatformTarget>
+    <DefineConstants>$(HybCustomConstants);PLATFORM_X64;$(MonoDefines)</DefineConstants>
+    <Optimize>true</Optimize>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_BasicVersion|AnyCPU' ">
+    <OutputPath>bin\Release_Basic\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;$(MonoDefines)</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_BasicVersion|x86' ">
+    <OutputPath>bin\x86\Release_Basic\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;PLATFORM_X86;HYBRIDIZER_BASIC;$(MonoDefines)</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release_BasicVersion|x64' ">
+    <OutputPath>bin\x64\Release_BasicVersion\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;PLATFORM_X64;HYBRIDIZER_BASIC;$(MonoDefines)</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <DocumentationFile>bin\x64\Release_BasicVersion\Hybridizer.Runtime.CUDAImports.xml</DocumentationFile>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_BasicVersion|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug_Basic\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);DEBUG;TRACE;$(MonoDefines)</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_BasicVersion|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug_Basic\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;DEBUG;PLATFORM_X86;$(MonoDefines)</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <DocumentationFile>bin\x86\Debug\Hybridizer.Runtime.CUDAImports.XML</DocumentationFile>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug_BasicVersion|x64' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug_BasicVersion\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);TRACE;PLATFORM_X64;HYBRIDIZER_BASIC;$(MonoDefines)</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <WarningLevel>0</WarningLevel>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <LangVersion>default</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>hybridize.runtime.cudaimports.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_BasicCPU|AnyCPU'">
+    <OutputPath>bin\Release_BasicCPU\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_BasicCPU|x86'">
+    <OutputPath>bin\x86\Release_BasicCPU\</OutputPath>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release_BasicCPU|x64'">
+    <OutputPath>bin\x64\Release_BasicCPU\</OutputPath>
+    <DefineConstants>$(HybCustomConstants);PLATFORM_X64;</DefineConstants>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AlignedAllocation.cs" />
+    <Compile Include="AlignedStorage.cs" />
+    <Compile Include="AtomicExpr.cs" />
+    <Compile Include="CUDARuntime\cooperative_groups.cs" />
+    <Compile Include="CUDARuntime\DriverAPI\Types\CUjitInputType.cs" />
+    <Compile Include="CUDARuntime\DriverAPI\Types\CUjit_option.cs" />
+    <Compile Include="CUDARuntime\DriverAPI\Types\CUresult.cs" />
+    <Compile Include="CUDARuntime\DriverAPI\driver.cs" />
+    <Compile Include="CUDARuntime\DriverAPI\Types\driverTypes.cs" />
+    <Compile Include="CUDARuntime\DriverAPI\Types\nvrtcTypes.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\Implementations\nvrtc-10.0.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\Implementations\nvrtc-10.1.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\INvrtc.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\JittedModule.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\nvrtc.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\StringArrayMarshal.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\Types\nvrtcProgram.cs" />
+    <Compile Include="CUDARuntime\Nvrtc\Types\nvrtcResult.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\cublas.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\ICublas.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-10.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-11.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-10.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-5.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-5.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-6.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-6.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-7.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-7.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-8.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-9.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-9.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Implementations\cublas-9.2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasAtomicsMode_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasDataType_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasDiagType_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasFillMode_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasGemmAlgo_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasHandle_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasMath_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasOperation_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasPointerMode_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasSideMode_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\cublasStatus_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cublas\Types\libraryPropertyType_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cudaDeviceProp.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\cuda.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Arrays\cudaArray_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Arrays\cudaMipmappedArray_const_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Arrays\cudaMipmappedArray_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Channels\cudaChannelFormatDesc.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Channels\cudaChannelFormatKind.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\cudaError_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\cudaExtent.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\cudaPos.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\cudaStream_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Event\cudaEventFlags.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Event\cudaEvent_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Functions\cudaFuncAttributes.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Functions\cudaFuncCache.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\LLVMVectorIntrinsics.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaGetDevicePointerFlags.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaHostAllocFlags.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaMallocArrayFlags.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaMemAttach.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaMemcpy3DParms.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaMemcpy3DPeerParms.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaMemcpyKind.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaMemmoryAdvise.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Memory\cudaPitchedPtr.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Resources\cudaResourceDesc.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Resources\cudaResourceType.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Resources\cudaResourceViewDesc.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Resources\cudaResourceViewFormat.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\size_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Surfaces\cudaSurfaceObject_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Textures\cudaTextureAddressMode.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Textures\cudaTextureDesc.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Textures\cudaTextureFilterMode.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Textures\cudaTextureObject_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Textures\cudaTextureReadMode.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\bool\bool2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\bool\bool4.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\bool\bool8.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\char\char2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\char\char4.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\char\char8.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\cuComplex.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\cuDoubleComplex.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\dim3.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\double\double2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\double\double4.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\float\float2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\float\float3.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\float\float4.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\float\float8.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\int\int2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\int\int4.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\int\int8.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\long2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\short\short2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\short\short4.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\short\short8.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\CudaTypes\Vectors\uchar4.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\ICuda.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\ICudaMarshalling.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-11.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-10.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-10.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-5.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-6.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-6.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-7.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-7.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-8.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-9.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-9.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\cuda-9.2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cuda\Implementations\CudaUUID_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\cufft.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\ICufft.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-10.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-11.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-10.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-5.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-6.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-6.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-7.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-8.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-9.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-9.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Implementations\cufft-9.2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Types\cufftCompatibility.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Types\cufftHandle.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Types\cufftResult.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cufft\Types\cufftType.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\curand_device.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\ICurand.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-10.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-11.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-10.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-5.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-6.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-6.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-7.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-7.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-8.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-9.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-9.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Implementations\curand-9.2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Types\curandGenerator_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Types\curandOrdering_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Types\curandRngType_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\curand\Types\curandStatus_t.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-10.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-11.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-10.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-7.5.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-8.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-9.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-9.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Implementations\cusparse-9.2.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Types\enums.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\cusparse\Types\opaqueStructures.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\enums\cudaDeviceAttr.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\enums\cudaDeviceP2PAttr.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\enums\cudaGraphicsRegisterFlags.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\enums\cudaLimit.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\enums\cudaSharedMemConfig.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\enums\deviceFlags.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\enums\GL_TEXTURE_MODE.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\Implementations\NPPI-11.0.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\Implementations\NPPI-10.1.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\INPPI.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\NPP.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\NppiNorm.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\NppiSize.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\NppStatus.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\NPP\NppStreamContext.cs" />
+    <Compile Include="CUDARuntime\RuntimeAPI\opaqueStructures.cs" />
+    <Compile Include="ForgedFunc.cs" />
+    <Compile Include="Marshalling\Internal\AbstractObjectVisiter.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\AggregatedAllocator.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\Deserializer\CUDAAggregatedDeserializer.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\Deserializer\CUDAAggregatedObjectDeserializer.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\Serializer\CUDAAggregatedObjectSerializer.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\Serializer\CUDAAggregatedSerializer.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\SizeCalculator\CUDAAggregatedObjectSizeCalculator.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\SizeCalculator\CUDAAggregatedSizeCalculator.cs" />
+    <Compile Include="Marshalling\Internal\MainMemory\MainMemorySerializationState.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\CudaAbstractSerializationState.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\Aggregated\CudaAggregatedSerializationState.cs" />
+    <Compile Include="Marshalling\Internal\Cuda\CudaSerializationState.cs" />
+    <Compile Include="Marshalling\Internal\NativeDeserializer.cs" />
+    <Compile Include="Marshalling\Internal\NativeObjectDeserializer.cs" />
+    <Compile Include="Marshalling\Internal\NativeObjectSerializer.cs" />
+    <Compile Include="Marshalling\Internal\NativeSerializer.cs" />
+    <Compile Include="Marshalling\Public\CudaMarshaler.cs" />
+    <Compile Include="Marshalling\Public\MainMemoryMarshaler.cs" />
+    <Compile Include="Marshalling\Internal\NativeSerializerState.cs" />
+    <Compile Include="Marshalling\Public\ThreadedCudaMarshaler.cs" />
+    <Compile Include="Marshalling\Shared\AbstractNativeMarshaler.cs" />
+    <Compile Include="Marshalling\Shared\CudaMarshalerTimer.cs" />
+    <Compile Include="Marshalling\Shared\DebugWriter.cs" />
+    <Compile Include="Marshalling\Shared\FieldVisitor.cs" />
+    <Compile Include="Marshalling\Shared\HandleDelegate.cs" />
+    <Compile Include="Marshalling\Shared\Logger.cs" />
+    <Compile Include="Marshalling\Shared\NativeDlls.cs" />
+    <Compile Include="Marshalling\Shared\NativePtrConverter.cs" />
+    <Compile Include="Marshalling\Shared\ThreadLocal.cs" />
+    <Compile Include="Marshalling\Shared\TypeInfo.cs" />
+    <Compile Include="JavaRandom.cs" />
+    <Compile Include="CUDARuntime\Math.cs" />
+    <Compile Include="CUDARuntime\nvblas.cs" />
+    <Compile Include="Parallel2D.cs" />
+    <Compile Include="SerializedPrototype.cs" />
+    <Compile Include="TdrDetection.cs" />
+    <Compile Include="VectorUnit.cs" />
+    <Compile Include="ZeroCopyResidentArray.cs" />
+    <Compile Include="CUDARuntime\CudaFP16.cs" />
+    <Compile Include="API.cs" />
+    <Compile Include="FieldTools.cs" />
+    <Compile Include="KernelInteropTools.cs" />
+    <Compile Include="HybridizerExtension.cs" />
+    <Compile Include="HybridizerProperties.cs" />
+    <Compile Include="HybRunner.cs" />
+    <Compile Include="JavaRuntime.cs" />
+    <Compile Include="NamingTools.cs" />
+    <Compile Include="NativeArrayIndexer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResidentArray.cs" />
+    <Compile Include="SharedMemory.cs" />
+    <Compile Include="StackArray.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="hybridize.runtime.cudaimports.snk" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
