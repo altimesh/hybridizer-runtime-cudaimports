@@ -9,6 +9,7 @@ namespace Hybridizer.Runtime.CUDAImports.Tests
     class ICudaTests
     {
         [Test]
+        [Ignore("can't run in CI yet -- depends on CUDA runtime")]
         public void TestGetErrorString()
         {
             // Just make sure that we can get the appropriate error messages
