@@ -8,6 +8,7 @@ namespace Hybridizer.Runtime.CUDAImports.Tests
     public class UnitTest_ResidentArray
     {
         [Test]
+        [Ignore("can't run in CI yet -- depends on cuda runtime")]
         public void TestMethod_AllocateArray()
         {
             long size = 32*1024*1024 ;
