@@ -118,11 +118,8 @@ namespace Hybridizer.Runtime.CUDAImports
         
 
         AssemblyBuilder assembly;
-        #if NETSTANDARD2_0
-        ModuleBuilder module = assembly.DefineDynamicModule("__Hybridizer_HybRunner_WrappedTypes.mod");
-        #else
         ModuleBuilder module;
-        #endif
+
         Dictionary<HybridizerFlavor, Dictionary<Type, Type>> wrappedTypes = new Dictionary<HybridizerFlavor, Dictionary<Type, Type>>();
 
         Type hyb_occupancy_del;
@@ -131,11 +128,7 @@ namespace Hybridizer.Runtime.CUDAImports
         private HybRunner(string dllName, HybridizerFlavor flavor, AbstractNativeMarshaler marshaller)
         {
             assembly = GetAssemblyBuilder("__Hybridizer_HybRunner_WrappedTypes");
-#if NETSTANDARD2_0
-        module = assembly.DefineDynamicModule("__Hybridizer_HybRunner_WrappedTypes.mod");
-#else
-            module = assembly.DefineDynamicModule("__Hybridizer_HybRunner_WrappedTypes", "__Hybridizer_HybRunner_WrappedTypes.mod");
-#endif
+            module = assembly.DefineDynamicModule("__Hybridizer_HybRunner_WrappedTypes.mod");
             // default dll name may be provided in assembly - if not exception
             if (dllName == null)
             {
@@ -961,7 +954,7 @@ namespace Hybridizer.Runtime.CUDAImports
 
                     var einvoke = delBuilder.DefineMethod("EndInvoke", MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Virtual, CallingConventions.Standard, typeof(void), new Type[] { typeof(int).MakeByRefType(), typeof(IAsyncResult) });
                     einvoke.SetImplementationFlags(MethodImplAttributes.Runtime | MethodImplAttributes.Managed);
-                    hyb_occupancy_del = delBuilder.CreateType();
+                    hyb_occupancy_del = delBuilder.CreateTypeInfo();
                 }
 
                 for (int i = 0; i < 17; ++i)
@@ -1323,11 +1316,7 @@ namespace Hybridizer.Runtime.CUDAImports
         {
             AssemblyName aname = new AssemblyName(assemblyName);
             AppDomain currentDomain = AppDomain.CurrentDomain; // Thread.GetDomain();
-#if NETSTANDARD2_0
             AssemblyBuilder builder = AssemblyBuilder.DefineDynamicAssembly(aname, AssemblyBuilderAccess.Run);
-#else
-            AssemblyBuilder builder = currentDomain.DefineDynamicAssembly(aname, AssemblyBuilderAccess.RunAndSave);
-#endif
             return builder;
         }
 
@@ -1353,7 +1342,6 @@ namespace Hybridizer.Runtime.CUDAImports
                 Console.WriteLine("Mapped " + symbolName);
 
             CallingConventions callingConvention = CallingConventions.Standard;
-#if NETSTANDARD2_0
             MethodBuilder result = tb.DefineMethod(symbolName, methodAttributes, callingConvention, typeof(int), parameters);
             var attrType = typeof(DllImportAttribute);
             var attrBuilder = new CustomAttributeBuilder(attrType.GetConstructor(new Type[] { typeof(string) }),
@@ -1370,14 +1358,6 @@ namespace Hybridizer.Runtime.CUDAImports
                 });
             result.SetCustomAttribute(attrBuilder);
             return result;
-#else
-            // https://msdn.microsoft.com/en-us/library/8hew0hf1(v=vs.100).aspx
-            MethodBuilder mb = tb.DefinePInvokeMethod(symbolName, _dllName, methodAttributes, callingConvention, typeof(int), parameters,
-                CallingConvention.Cdecl, CharSet.Ansi);
-            mb.SetImplementationFlags(
-                mb.GetMethodImplementationFlags() | MethodImplAttributes.PreserveSig);
-            return mb;
-#endif
         }
         /// <summary>
         /// INTERNAL METHOD - For debugging only
@@ -1385,7 +1365,7 @@ namespace Hybridizer.Runtime.CUDAImports
         /// <param name="name">name : example.dll</param>
         public void saveAssembly(string name = "HybridizerHybRunner_Generated.dll")
         {
-            assembly.Save(name);
+            //assembly.Save(name);
         }
     }
 }

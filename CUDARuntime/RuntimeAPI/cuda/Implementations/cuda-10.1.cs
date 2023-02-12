@@ -14,11 +14,7 @@ namespace Hybridizer.Runtime.CUDAImports
     /// </summary>
     internal unsafe partial class CudaImplem
     {
-#if PLATFORM_X64
         [StructLayout(LayoutKind.Sequential, Pack = 8)]
-#else
-		[StructLayout(LayoutKind.Sequential, Pack = 4)]
-#endif
         public struct cudaDeviceProp_101
         {
             [MarshalAs(UnmanagedType.ByValArray, SizeConst = 256)]
