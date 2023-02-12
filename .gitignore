@@ -2,16 +2,6 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/bin
-/obj
-/.vs/Hybridizer.Runtime.CUDAImports
-/.vs/ProjectEvaluation
-/tests/bin/Debug/net7.0
-/tests/obj
-/src/bin/AnyCPU/Debug/netstandard2.1
-/src/obj/Debug/netstandard2.1
-/src/.vs/ProjectEvaluation
-/src/.vs/Hybridizer.Runtime.CUDAImports/DesignTimeBuild
-/src/.vs/Hybridizer.Runtime.CUDAImports/v17/.suo
-/src/.vs/Hybridizer.Runtime.CUDAImports/v17/.futdcache.v2
-/src/.vs/Hybridizer.Runtime.CUDAImports/v17/.suo
+**/obj
+**/bin
+**/.vs
