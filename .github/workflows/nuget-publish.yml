@@ -1,10 +1,6 @@
 
 name: publish
-on:
-  workflow_dispatch:
-  release:
-    types:
-      - published 
+on: workflow_dispatch
 
 env:
   NuGetDirectory: ${{ github.workspace}}
