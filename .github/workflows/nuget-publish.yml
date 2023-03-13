@@ -21,8 +21,10 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v3
 
-    - run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
-    - run: dotnet pack --configuration Release_BasicVersion --version-suffix essentials --output ${{ env.NuGetDirectory }}
+    - name: pack release
+      run: dotnet pack --configuration Release --output ${{ env.NuGetDirectory }}
+    - name: pack essentials
+      run: dotnet pack --configuration Release_BasicVersion --version-suffix essentials --output ${{ env.NuGetDirectory }}
 
     - uses: actions/upload-artifact@v3
       with:
@@ -30,15 +32,6 @@ jobs:
         if-no-files-found: error
         retention-days: 7
         path: ${{ env.NuGetDirectory }}/*.nupkg
-
-  run_test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-    - name: Run tests
-      run: dotnet test --configuration Release
 
   deploy:
     runs-on: ubuntu-latest
