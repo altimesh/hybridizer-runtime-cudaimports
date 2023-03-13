@@ -22,9 +22,11 @@ jobs:
         dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build release_essentials
+    - name: Build Release Essentials
       run: dotnet build --no-restore --configuration Release_BasicVersion
-    - name: Build release
+    - name: Test Release Essentials
+      run: dotnet test --configuration Release_BasicVersion --no-build --verbosity normal
+    - name: Build Release
       run: dotnet build --no-restore --configuration Release
-    - name: Test
-      run: dotnet test --no-build --verbosity normal
+    - name: Test Release Essentials
+      run: dotnet test --configuration Release_BasicVersion --no-build --verbosity normal
