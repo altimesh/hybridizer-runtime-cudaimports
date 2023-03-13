@@ -1345,20 +1345,12 @@ namespace Hybridizer.Runtime.CUDAImports
             MethodBuilder result = tb.DefineMethod(symbolName, methodAttributes, callingConvention, typeof(int), parameters);
             var attrType = typeof(DllImportAttribute);
             var attrBuilder = new CustomAttributeBuilder(attrType.GetConstructor(new Type[] { typeof(string) }),
-                new object[1] { _dllName },
-                new[]
-                {
-                    attrType.GetProperty("CallingConvention"),
-                    attrType.GetProperty("CharSet")
-                },
-                new object[]
-                {
-                    CallingConvention.Cdecl,
-                    CharSet.Ansi
-                });
+                new object[1] { _dllName }
+             );
             result.SetCustomAttribute(attrBuilder);
             return result;
         }
+
         /// <summary>
         /// INTERNAL METHOD - For debugging only
         /// </summary>

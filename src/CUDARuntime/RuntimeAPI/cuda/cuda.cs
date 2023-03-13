@@ -78,6 +78,8 @@ namespace Hybridizer.Runtime.CUDAImports
             { "100", new[] { Cuda_64_100.CUDARTDLL, Cuda_32_100.CUDARTDLL} },
             { "101", new[] { Cuda_64_101.CUDARTDLL } },
             { "110", new[] { Cuda_64_110.CUDARTDLL } },
+            { "116", new[] { Cuda_64_110.CUDARTDLL } },
+            { "117", new[] { Cuda_64_110.CUDARTDLL } },
             #endif
 
         };
@@ -209,6 +211,8 @@ namespace Hybridizer.Runtime.CUDAImports
                         throw new NotSupportedException("cuda 10.1 dropped 32 bits support");
                     break;
                 case "110":
+                case "116":
+                case "117":
                     if (IntPtr.Size == 8)
                         instance = new Cuda_64_110();
                     else
