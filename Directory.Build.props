@@ -1,7 +1,5 @@
 <Project>
    <PropertyGroup>
-    <Version>2.1.0</Version>
-    <AssemblyVersion>2.1.0</AssemblyVersion>
     <Authors>Altimesh engineers</Authors>
     <Company>Altimesh</Company>
     <NeutralLanguage>en</NeutralLanguage>

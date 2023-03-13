@@ -4,6 +4,7 @@
     <OutputType>Library</OutputType>
     <MonoDefines Condition="'$(OS)' == 'Unix'">MONO</MonoDefines>
     <PackageIcon>.\Altimesh256x256.png</PackageIcon>
+    <PackageId>Altimesh.Hybridizer.Runtime.CUDAImports</PackageId>
     <!-- Otherwise, minver produces large suffixes like 1.2.3-alpha.0.223 -->
     <MinVerIgnoreHeight>true</MinVerIgnoreHeight>
   </PropertyGroup>
