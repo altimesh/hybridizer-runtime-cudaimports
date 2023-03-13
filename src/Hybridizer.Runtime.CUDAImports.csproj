@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFrameworks>netstandard2.1;net48;net47;net471;net472;net461;net462;netcoreapp3.1;net7.0</TargetFrameworks>
     <OutputType>Library</OutputType>
     <MonoDefines Condition="'$(OS)' == 'Unix'">MONO</MonoDefines>
     <PackageIcon>.\Altimesh256x256.png</PackageIcon>
