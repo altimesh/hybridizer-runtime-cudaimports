@@ -19,27 +19,5 @@ jobs:
     - name: pack essentials
       run: dotnet pack --configuration Release_BasicVersion --output ${{ env.NuGetDirectory }}
 
-    - uses: actions/upload-artifact@v3
-      with:
-        name: nuget
-        if-no-files-found: error
-        retention-days: 7
-        path: ${{ env.NuGetDirectory }}/*.nupkg
-
-  # deploy:
-  #   runs-on: ubuntu-latest
-  #   needs: [ create_nugets, run_test ]
-  #   steps:
-  #     - uses: actions/download-artifact@v3
-  #       with:
-  #         name: nuget
-  #         path: ${{ env.NuGetDirectory }}
-
-  #     - name: Setup .NET Core
-  #       uses: actions/setup-dotnet@v3
-
-  #     - name: Publish NuGet package
-  #       run: |
-  #         foreach($file in (Get-ChildItem "${{ env.NuGetDirectory }}" -Recurse -Include *.nupkg)) {
-  #             dotnet nuget push $file --api-key "${{ secrets.NUGET_PUBLISH }}" --source https://api.nuget.org/v3/index.json --skip-duplicate
-  #         }
+    - name: publish to nuget.org
+      run: dotnet nuget push *.nupkg --api-key "${{ secrets.NUGET_PUBLISH }}" --source https://api.nuget.org/v3/index.json
