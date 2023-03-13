@@ -3,7 +3,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <OutputType>Library</OutputType>
     <MonoDefines Condition="'$(OS)' == 'Unix'">MONO</MonoDefines>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PackageIcon>.\Altimesh256x256.png</PackageIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\AnyCPU\Debug\</OutputPath>
@@ -125,7 +125,6 @@
     <PlatformTarget>x64</PlatformTarget>
     <SignAssembly>True</SignAssembly>
     <PackageProjectUrl>https://github.com/altimesh/hybridizer-runtime-cudaimports</PackageProjectUrl>
-    <PackageIcon>Altimesh128x128.png</PackageIcon>
     <AssemblyVersion>2.0.3</AssemblyVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
@@ -153,10 +152,7 @@
   <ItemGroup>
     <Content Include="appsettings.json" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\hybridizer-software-suite\Altimesh128x128.png">
-      <Pack>True</Pack>
-      <PackagePath>\</PackagePath>
-    </None>
-  </ItemGroup>
+<ItemGroup>
+    <None Include="Altimesh256x256.png" Pack="true" PackagePath="\" />
+</ItemGroup>
 </Project>
