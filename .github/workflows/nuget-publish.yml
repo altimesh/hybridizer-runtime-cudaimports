@@ -17,7 +17,7 @@ jobs:
       uses: actions/setup-dotnet@v3
 
     - name: pack
-      run: dotnet pack -p:Configuration=Release_BasicVersion -p:Platform=x64 --output ${{ env.NuGetDirectory }} ../src/Hybridizer.Runtime.CUDAImports.csproj
+      run: dotnet pack -p:Configuration=Release_BasicVersion -p:Platform=x64 --output ${{ github.workspace}} ${{ github.workspace}}/src/Hybridizer.Runtime.CUDAImports.csproj
 
     - name: publish to nuget.org
       run: find . -name '*.nupkg' | xargs -i dotnet nuget push {} --api-key "${{ secrets.NUGET_PUBLISH }}" --source https://api.nuget.org/v3/index.json
