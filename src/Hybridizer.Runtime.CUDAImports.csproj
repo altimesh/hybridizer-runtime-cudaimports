@@ -2,6 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.1;net48;net47;net471;net472;net461;net462;netcoreapp3.1;net7.0</TargetFrameworks>
     <OutputType>Library</OutputType>
+    <PackRelease>true</PackRelease>
     <MonoDefines Condition="'$(OS)' == 'Unix'">MONO</MonoDefines>
     <PackageIcon>.\Altimesh256x256.png</PackageIcon>
     <PackageId>Altimesh.Hybridizer.Runtime.CUDAImports</PackageId>
